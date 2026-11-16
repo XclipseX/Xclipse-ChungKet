@@ -14,11 +14,12 @@
 <!-- Phông tuỳ chọn (cần mạng; không có thì tự dùng phông hệ thống). Bỏ chú thích nếu muốn dùng:
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"> -->
-<link rel="stylesheet" href="css/tokens.css?v=0.1.1">
-<link rel="stylesheet" href="css/app.css?v=0.1.1">
-<link rel="stylesheet" href="css/hero.css?v=0.1.1">
+<link rel="stylesheet" href="css/tokens.css?v=0.1.2">
+<link rel="stylesheet" href="css/app.css?v=0.1.2">
+<link rel="stylesheet" href="css/hero.css?v=0.1.2">
 <!-- Lớp Lucian: vi tương tác cho mọi thành phần -->
-<link rel="stylesheet" href="css/lucian.css?v=0.1.1">
+<link rel="stylesheet" href="css/lucian.css?v=0.1.2">
+<link rel="stylesheet" href="css/biz.css?v=0.1.2">
 </head>
 <body>
 <a class="skip-link" href="#main">Bỏ qua, tới nội dung chính</a>
@@ -50,32 +51,34 @@
 <div id="toasts" class="toasts" role="region" aria-label="Thông báo" aria-live="polite"></div>
 
 <!-- Thứ tự nạp: config -> version -> core -> ui -> form -> charts -> export -> ai -> demo -> modules -> features -> app -->
-<script src="js/config.js?v=0.1.1"></script>
-<script src="js/version.js?v=0.1.1"></script>
-<script src="js/core.js?v=0.1.1"></script>
-<script src="js/ui.js?v=0.1.1"></script>
-<script src="js/form.js?v=0.1.1"></script>
-<script src="js/charts.js?v=0.1.1"></script>
-<script src="js/export.js?v=0.1.1"></script>
-<script src="js/ai.js?v=0.1.1"></script>
-<script src="js/demo.js?v=0.1.1"></script>
+<script src="js/config.js?v=0.1.2"></script>
+<script src="js/version.js?v=0.1.2"></script>
+<script src="js/core.js?v=0.1.2"></script>
+<script src="js/ui.js?v=0.1.2"></script>
+<script src="js/form.js?v=0.1.2"></script>
+<script src="js/charts.js?v=0.1.2"></script>
+<script src="js/export.js?v=0.1.2"></script>
+<script src="js/ai.js?v=0.1.2"></script>
+<script src="js/demo.js?v=0.1.2"></script>
 <!-- Firebase tuỳ chọn: chỉ hoạt động khi EP.config.firebase.enabled = true (mặc định tắt, không gọi mạng). Phải nạp trước features. -->
-<script src="js/firebase.js?v=0.1.1"></script>
+<script src="js/firebase.js?v=0.1.2"></script>
 <!-- Mô-đun tiện ích tuỳ chọn (xoá dòng nào không dùng) -->
-<script src="js/mock.js?v=0.1.1"></script>
-<script src="js/metrics.js?v=0.1.1"></script>
-<script src="js/match.js?v=0.1.1"></script>
-<script src="js/calc.js?v=0.1.1"></script>
-<script src="js/checklist.js?v=0.1.1"></script>
-<script src="js/quiz.js?v=0.1.1"></script>
-<script src="js/chat.js?v=0.1.1"></script>
-<script src="js/timeslot.js?v=0.1.1"></script>
+<script src="js/mock.js?v=0.1.2"></script>
+<script src="js/metrics.js?v=0.1.2"></script>
+<script src="js/match.js?v=0.1.2"></script>
+<script src="js/calc.js?v=0.1.2"></script>
+<script src="js/scenario.js?v=0.1.2"></script>
+<script src="js/import.js?v=0.1.2"></script>
+<script src="js/checklist.js?v=0.1.2"></script>
+<script src="js/quiz.js?v=0.1.2"></script>
+<script src="js/chat.js?v=0.1.2"></script>
+<script src="js/timeslot.js?v=0.1.2"></script>
 <!-- Lớp Lucian: nạp SAU mọi mô-đun trên (bọc EP.ui / EP.ai) và TRƯỚC features -->
-<script src="js/lucian.js?v=0.1.1"></script>
+<script src="js/lucian.js?v=0.1.2"></script>
 <!-- FEATURES: mỗi feature một dòng. Nhân bản features/_example -> features/<ten>/ rồi thêm dòng ở đây. -->
-<script src="features/_example/feature.js?v=0.1.1"></script>
-<script src="features/_playground/feature.js?v=0.1.1"></script>
-<script src="js/hero.js?v=0.1.1"></script>
-<script src="js/app.js?v=0.1.1"></script>
+<script src="features/_example/feature.js?v=0.1.2"></script>
+<script src="features/_playground/feature.js?v=0.1.2"></script>
+<script src="js/hero.js?v=0.1.2"></script>
+<script src="js/app.js?v=0.1.2"></script>
 </body>
 </html>
