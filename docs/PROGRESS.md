@@ -3,7 +3,7 @@
 > Claude cập nhật file này sau mỗi mốc và nhắc đội các mục "Việc cần làm" còn ô chưa tick.
 > Giờ tính từ lúc bắt đầu sprint (T0 = <hh:mm>). Mốc nào trễ hơn 5 phút: ghi vào "Quyết định" và cắt phạm vi, không kéo dài mốc sau.
 
-**Đội:** <Tên đội> · **T0:** <hh:mm> · **Hạn nộp:** <hh:mm>
+**Đội:** Xclipse (Diệu Anh, Vũ Trí Dũng, Nguyên – nhóm trưởng) · **T0:** <hh:mm> · **Hạn nộp:** <hh:mm>
 **Cập nhật lần cuối:** <hh:mm>, <đã xong gì, đang làm gì>
 
 ## Mốc thời gian

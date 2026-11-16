@@ -1,6 +1,6 @@
 # Minh chứng dùng AI để xây dựng và cải thiện sản phẩm: Xclipse
 
-**Đội:** <Tên đội> · **Công cụ AI:** <Claude (model) để lập kế hoạch và viết mã; Gemini để tạo ảnh mockup; …>
+**Đội:** Xclipse (Diệu Anh, Vũ Trí Dũng, Nguyên – nhóm trưởng) · **Công cụ AI:** Claude (Opus, Sonnet, Haiku), Claude Design, Claude in Chrome; Gemini Antigravity
 
 > Tối đa **1 trang A4** và **5 ảnh**. Mỗi ảnh là ảnh chụp thật cuộc trò chuyện hoặc màn hình. Che API key, email và số điện thoại thật trước khi chụp hoặc nộp.
 
