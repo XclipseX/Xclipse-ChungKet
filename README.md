@@ -34,7 +34,7 @@
 | Lớp | Công nghệ (kèm phiên bản) |
 |---|---|
 | Giao diện | <HTML/CSS/JS thuần, hoặc React x.y, Next.js x.y, Tailwind x.y> |
-| Thư viện | <…> |
+| Thư viện | Vi tương tác chuyển thể từ Lucian Lab UI (MIT, (c) 2026 Seokwoooo; giấy phép ở `vendor/lucian/LICENSE`), tự viết trong `css/lucian.css` + `js/lucian.js`; không CDN. <thư viện khác nếu có> |
 | Lưu trữ | <localStorage / Cloud Firestore / Supabase (Postgres, RLS) / Google Sheet> |
 | Đăng nhập | <không / Firebase Authentication bằng Google> |
 | Triển khai | <GitHub Pages / Vercel / cPanel> |
