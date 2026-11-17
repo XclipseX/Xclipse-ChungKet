@@ -10,7 +10,7 @@
 |---|---|
 | Tên đội thi | Xclipse |
 | Thành viên | Diệu Anh · Vũ Trí Dũng · Nguyên (nhóm trưởng) |
-| Trường | {{TRUONG}} |
+| Trường | Cao đẳng FPT Polytechnic Thanh Hóa |
 | Đề bài | Chương trình thành viên giới thiệu khách (Referral) cho doanh nghiệp hosting/domain |
 | Demo trực tuyến | https://xclipsex.github.io/Xclipse-ChungKet/ |
 | Mã nguồn (GitHub) | https://github.com/XclipseX/Xclipse-ChungKet |
