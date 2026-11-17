@@ -73,13 +73,25 @@
     function setVal(n, v) { var f = field(n); if (f) { f.value = v; f.dispatchEvent(new Event('input', { bubbles: true })); f.dispatchEvent(new Event('change', { bubbles: true })); } }
     $('quick').addEventListener('click', function (e) {
       var b = e.target.closest('[data-q]'); if (!b) return;
-      var ms = members.list(), m = ms[0]; if (!m) return;
-      if (b.getAttribute('data-q') === 'self') { setVal('refCode', m.refCode); setVal('customerName', m.name); setVal('phone', m.phone); }
-      else {
-        var refs = EP.collection('referrals').list().filter(function (r) { return r.customerKey; });
-        var r = refs[0], owner = r && members.get(r.referrerId) || m;
-        setVal('refCode', owner.refCode); setVal('customerName', r ? r.customerName : 'Khách trùng'); setVal('phone', r ? r.customerKey : '0900000000');
+      var ms = members.list(); if (!ms.length) return;
+      var submit = function () { if (formEl.requestSubmit) formEl.requestSubmit(); else formEl.dispatchEvent(new Event('submit', { cancelable: true })); };
+      var svc = (R().PRICES[1] || R().PRICES[0] || {}).service;
+      if (b.getAttribute('data-q') === 'self') {
+        // Ca 1: thành viên dùng chính mã của mình + SĐT của mình -> Không hợp lệ (tự giới thiệu)
+        var m = ms.filter(function (x) { return x.refCode === 'REF-LM06'; })[0] || ms[0];
+        setVal('refCode', m.refCode); setVal('customerName', m.name); setVal('phone', m.phone); if (svc) setVal('service', svc);
+        EP.ui.toast('Ca thử: ' + m.name + ' dùng mã của chính mình (' + m.refCode + ').', { type: 'info' });
+      } else {
+        // Ca 2: một SĐT khách đã được ghi nhận qua người A, nay đăng ký lại qua người B -> Từ chối – trùng
+        var isPhone = function (k) { return /^0\d{9}$/.test(String(k || '')); };
+        var ok = EP.collection('referrals').list().filter(function (r) { return isPhone(r.customerKey) && r.status !== 'rejected_dup' && r.status !== 'invalid_self'; })[0];
+        if (!ok) { R().signup({ refCode: ms[0].refCode, customerName: 'Khách thử trùng', phone: '0911000111', service: svc }); ok = EP.collection('referrals').list().filter(function (r) { return r.customerKey === '0911000111'; })[0]; }
+        var other = ms.filter(function (x) { return x.id !== ok.referrerId; })[0] || ms[0];
+        setVal('refCode', other.refCode); setVal('customerName', ok.customerName); setVal('phone', ok.customerKey); if (svc) setVal('service', svc);
+        EP.ui.toast('Ca thử: khách ' + ok.customerName + ' (' + ok.customerKey + ') đã có, đăng ký lại qua mã ' + other.refCode + '.', { type: 'info' });
       }
+      setTimeout(submit, 350);
+      return;
       EP.ui.toast('Đã điền ca thử.', { type: 'info' });
     });
     quick(); EP.collection('members').onChange(function () { if (root.document.body.contains(el)) { quick(); live(); } });
