@@ -815,3 +815,53 @@ Với các giả định đó: một trăm tám mươi người tham gia tạo r
 SLIDE 12 — Tổng kết · Nguyên · 25 giây
 Tóm lại, Xclipse Referral giúp doanh nghiệp hosting có khách mới với chi phí thấp hơn quảng cáo, doanh thu gấp ba lần chi phí ưu đãi theo giả định. Giới hạn hiện tại là số liệu mới là mô phỏng. Bước tiếp theo, chúng em muốn thử với khách thật để đo lại tỉ lệ chuyển đổi. Xin cảm ơn ban giám khảo, đội sẵn sàng nhận câu hỏi.
 ```
+
+---
+
+## PHẦN 4 — SỬA LỖI + SẮP XẾP LẠI PHẦN DŨNG (CHỨC NĂNG) VÀ NGUYÊN (KỸ THUẬT)
+
+```
+Sửa deck hiện tại (11 slide + P2, P3). Giữ nguyên slide 1–3 của Diệu Anh (chỉ sửa lỗi nêu dưới). Sắp xếp lại thành 12 slide: Dũng = toàn bộ CHỨC NĂNG (slide 4–8), Nguyên = toàn bộ KỸ THUẬT (slide 9–12). Tải lên xclipse-slide-anh.zip mới (ảnh app bản 0.1.17, cùng tên file) và thay toàn bộ ảnh điện thoại cũ bằng ảnh mới cùng tên. Số trang chân slide ghi "NN / 12".
+
+A. LỖI CẦN SỬA (mọi slide)
+1. Slide 1: thay "[TRƯỜNG]" bằng "Cao đẳng FPT Polytechnic Thanh Hóa".
+2. Slide 4 (video): nhúng 00-demo-video.mp4 vào khung dọc (poster 00-demo-video-poster.png). Thay "[SỐ: giây video] giây" bằng "112 giây". Xóa dòng chữ đường dẫn "Xem video: docs/..." trong khung.
+3. Slide 6 (luồng): tiêu đề "Luồng giới thiệu khách" đang đè lên phụ đề → tiêu đề 1 dòng, phụ đề xuống dòng riêng cách ≥ 16px. Chú thích dưới 3 điện thoại đang đè lên dòng "Dữ liệu lưu cục bộ..." → đưa dòng ghi chú xuống dưới cùng hoặc bỏ. Bỏ thẻ "[SỐ: giây cả luồng]".
+4. Slide thể lệ: thay "[SỐ: ca lỗi được chặn]" bằng số "3" (tự giới thiệu · khách trùng · mã sai); chữ "ca lỗi được chặn" đang bị dựng đứng từng chữ → đặt 1 dòng ngang dưới số.
+5. Mọi ô "[SỐ: ca đạt]/[SỐ: tổng ca]" → "330/330 kiểm tra tự động đạt".
+6. Kịch bản: Thận trọng 37 khách mới · 5,3 tr doanh thu · gấp 2,0 lần; Cơ sở 90 khách · 16,2 tr · 3,0 lần; Lạc quan 187 khách · 40,3 tr · 4,5 lần (nhãn Giả định). Không để chữ tràn ra ngoài thẻ.
+7. Câu hòa vốn đúng: "Mỗi khách qua giới thiệu tốn 60.000đ, rẻ hơn quảng cáo 30.000đ. Chỉ kém hiệu quả hơn quảng cáo khi ưu đãi mỗi khách vượt 90.000đ; chỉ lỗ tháng đầu khi vượt 180.000đ." Xóa câu "Ưu đãi lỗ khi tổng ưu đãi mỗi khách vượt 90.000đ".
+8. Slide tổng kết: thay ô [QR] bằng mã QR thật của https://xclipsex.github.io/Xclipse-ChungKet/ (link đầy đủ 1 dòng, không bị cắt); "[LINK: mã nguồn]" → "github.com/XclipseX/Xclipse-ChungKet".
+9. Phụ lục P2, P3: đổi tiêu đề "Dự phòng: ..." thành "Phụ lục: ..." (tránh nhầm với "Dự phóng").
+10. Không còn ô [SỐ: …], [LINK: …], [TRƯỜNG] nào trong deck. Không chữ đè, không chữ tràn khỏi thẻ.
+
+B. CẤU TRÚC MỚI 12 SLIDE
+1–3 Diệu Anh: giữ nguyên (Bìa · Bối cảnh 90.000đ · Giải pháp 60.000đ).
+4 Dũng – Video demo (như cũ, đã sửa A2).
+5 Dũng – Năm tính năng (như cũ).
+6 Dũng – Luồng giới thiệu khách: 3 máy 03-dang-ky-cho · 04-dang-ky-da-thanh-toan · 05-theo-doi.
+7 Dũng – Thể lệ và chống gian lận: 3 máy 06-the-le · 10-ca-sai · 11-ca-bien; số nhấn "3" ca gian lận bị chặn.
+8 Dũng – Giả định và dự phóng (gộp 2 slide cũ, nhìn từ góc người dùng): 2 máy 07-du-phong · 09-du-phong-bieu-do; bảng 4 giả định gọn bên trái; số nhấn "3,0x"; 3 kịch bản dạng 3 chip nhỏ (mục A6).
+9 Nguyên – Kiến trúc: giữ slide "Kiến trúc" cũ, bỏ ô số kiểm thử; số nhấn "0 khóa API trong mã"; hàng 4 khối Giao diện → Logic referral → Mô phỏng thanh toán → Lưu trong trình duyệt.
+10 Nguyên – Logic và dữ liệu (MỚI, layout thẻ/bảng, không ảnh): 3 thẻ:
+   • "Dữ liệu": 2 bảng members (mã REF duy nhất) và referrals (7 trạng thái: đã chuyển đổi, chờ thanh toán, đang xử lý, đã hủy, tự giới thiệu, trùng, đang rà soát); nạp file Excel BTC 8 thành viên, 12 lượt.
+   • "Quy tắc trong mã": SĐT khách = SĐT người giới thiệu → tự giới thiệu; SĐT đã có → trùng; ưu đãi chỉ cộng khi trạng thái chuyển sang "đã chuyển đổi"; tầng 2 cộng cho người giới thiệu gián tiếp.
+   • "Công thức dự phóng": tham gia = thành viên × tỉ lệ; tiềm năng = tham gia × lượt; khách mới = tiềm năng × chuyển đổi; doanh thu = khách × 180.000đ; chi phí = khách × 60.000đ; mẫu số 0 → "Không đủ dữ liệu".
+   Số nhấn: "7 trạng thái".
+11 Nguyên – Kiểm thử và chất lượng điện thoại (MỚI): số lớn "330/330"; 4 gạch: Test luồng chính tự động trên Chromium · Kiểm tra khổ 360 và 390px: không tràn ngang, nút ≥ 48px, chữ ≥ 14px · Test nghiệp vụ referral: tự giới thiệu, trùng, dự phóng khớp số BTC · Quét khóa bí mật trước mỗi lần đẩy: 0 lộ. 1 máy 02-thanh-vien bên phải.
+12 Nguyên – Quy trình AI và tổng kết: trái = 3 bước "Claude Code điều phối nhiều agent song song → đội thử trên điện thoại, gửi ảnh lỗi → sửa, chạy lại test, đẩy lên" + chip công cụ: Claude (Opus, Sonnet, Haiku, Claude Design), Claude in Chrome, Gemini Antigravity (rà soát chéo); phải = QR + link; dòng giới hạn: "Số liệu là mô phỏng/giả định, bước tiếp theo: thử với khách thật"; chip "Hỏi đáp".
+P2, P3: giữ (đổi tên mục A9).
+
+C. SPEAKER NOTES (thay ghi chú slide 4–12; slide 1–3 giữ nguyên)
+4 · Vũ Trí Dũng · 20s: Cảm ơn Diệu Anh. Em là Dũng, phụ trách phần chức năng. Đây là video gần hai phút quay ứng dụng chạy trên điện thoại với dữ liệu mẫu của ban tổ chức, có giọng thuyết minh. Mời ban giám khảo theo dõi.
+5 · Vũ Trí Dũng · 30s: Ứng dụng có đủ năm tính năng theo đề. Một, đăng ký thành viên, sinh mã và link giới thiệu riêng. Hai, khách mới đăng ký qua mã. Ba, trang theo dõi số khách, trạng thái và tổng ưu đãi. Bốn, thể lệ hiển thị ngay trong app. Năm, bảng giả định và dự phóng. Quy tắc cốt lõi: ưu đãi chỉ cộng khi khách thanh toán thành công.
+6 · Vũ Trí Dũng · 25s: Luồng gồm ba bước. Khách mới nhập mã, chọn gói, hệ thống ghi nhận ở trạng thái chờ thanh toán, chưa cộng ưu đãi. Khi thanh toán thành công, người giới thiệu nhận ba mươi nghìn, khách mới được giảm ba mươi nghìn. Thành viên bấm Xem theo dõi là thấy ngay ưu đãi của mình.
+7 · Vũ Trí Dũng · 30s: Thể lệ nằm ngay trong ứng dụng: ba mươi nghìn mỗi bên, thêm mười nghìn cho người giới thiệu gián tiếp ở tầng hai. Có ba ca gian lận bị chặn. Tự dùng mã của mình thì bị từ chối. Khách đã được ghi nhận thì lượt sau bị từ chối vì trùng. Mã sai thì báo lỗi, không lưu.
+8 · Vũ Trí Dũng · 30s: Phần dự phóng cho chủ doanh nghiệp tự nhập giả định. Mặc định theo số ban tổ chức: một nghìn hai trăm thành viên, mười lăm phần trăm tham gia, mỗi người giới thiệu hai lượt, chuyển đổi hai mươi lăm phần trăm. Kết quả chín mươi khách mới, doanh thu mười sáu phẩy hai triệu, gấp ba lần chi phí ưu đãi. Ba kịch bản và biểu đồ sáu tháng giúp xem trước rủi ro. Mời anh Nguyên trình bày phần kỹ thuật.
+9 · Nguyên · 25s: Cảm ơn Dũng. Về kiến trúc, ứng dụng chạy hoàn toàn trên trình duyệt, gồm bốn khối: giao diện, logic giới thiệu, mô phỏng thanh toán và lưu trữ cục bộ. Phần mô phỏng đều có nhãn rõ ràng. Không có khóa API nào trong mã nguồn, nên có thể mở công khai an toàn.
+10 · Nguyên · 30s: Dữ liệu gồm hai bảng: thành viên với mã giới thiệu duy nhất, và lượt giới thiệu với bảy trạng thái. Quy tắc chống gian lận nằm trong mã: số điện thoại khách trùng người giới thiệu là tự giới thiệu, số đã có là trùng. Ưu đãi chỉ cộng khi trạng thái chuyển sang đã chuyển đổi. Công thức dự phóng nhân lần lượt từng giả định, mẫu số bằng không thì báo không đủ dữ liệu.
+11 · Nguyên · 25s: Về kiểm thử, bộ test tự động chạy ba trăm ba mươi kiểm tra, tất cả đều đạt. Giao diện được kiểm tra ở hai khổ điện thoại 360 và 390 pixel: không tràn ngang, nút bấm tối thiểu 48 pixel. Trước mỗi lần đẩy mã, chúng em quét khóa bí mật, kết quả không lộ khóa nào.
+12 · Nguyên · 30s: Chúng em dùng Claude Code điều phối nhiều agent làm song song, đội thử trên điện thoại rồi gửi ảnh lỗi để sửa, mỗi lần sửa đều chạy lại test. Gemini Antigravity rà soát chéo. Giới hạn hiện tại là số liệu còn mô phỏng; bước tiếp theo là thử với khách thật. Xin cảm ơn ban giám khảo, đội sẵn sàng nhận câu hỏi.
+
+D. Tự kiểm trước khi trả: không chữ đè/tràn, không ô [SỐ]/[LINK]/[TRƯỜNG], ảnh điện thoại dọc đủ chiều, mỗi slide có notes đúng người nói, xuất PPTX có notes + PDF.
+```
