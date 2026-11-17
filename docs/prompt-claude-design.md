@@ -763,3 +763,55 @@ Tôi đã tải lên tệp **`xclipse-referral-slide-anh.zip`** (ảnh chụp th
 
 Số cập nhật (điền nếu có): `[SỐ: ca đạt] = … · [SỐ: tổng ca] = … · [SỐ: ca lỗi được chặn] = … · [SỐ: giây video] = … · [SỐ: giây cả luồng] = … · [SỐ: giây phản hồi] = … · [SỐ: lãi lạc quan] = … · [SỐ: lãi bi quan] = … (điền số đã đo từ docs/BANG-KIEM-THU.md)`
 `````
+
+---
+
+## PHẦN 3 — LỜI THUYẾT TRÌNH VÀO SPEAKER NOTES (gửi trong cùng dự án)
+
+```
+Cập nhật ghi chú người nói (speaker notes) của 12 slide chính. Xóa toàn bộ ghi chú cũ (bỏ hết cue kỹ thuật viên, mốc giờ, "3 neo") và thay bằng đúng khung dưới đây. Không đổi gì trên mặt slide.
+
+Khung mỗi slide:
+NGƯỜI NÓI: <tên>
+THỜI LƯỢNG: <số> giây
+LỜI NÓI:
+<đoạn văn nói, chép nguyên văn bên dưới>
+
+Quy tắc: giữ nguyên văn lời nói, không thêm số liệu, không viết "AI thật". Mỗi đoạn đọc trong 20–30 giây (≈ 60–85 từ). Nếu slide nào còn ô [SỐ: …] trên mặt slide thì lời nói đã tránh nhắc số đó, giữ nguyên. Xuất lại PPTX có đủ notes.
+
+SLIDE 1 — Bìa · NGƯỜI NÓI: Diệu Anh · 20 giây
+Kính chào ban giám khảo. Chúng em là đội Xclipse, bảng B Kinh tế. Sản phẩm của chúng em là Xclipse Referral, một ứng dụng giúp doanh nghiệp hosting và tên miền biến chính khách hàng hiện tại thành kênh tìm khách mới, thông qua chương trình thành viên giới thiệu có ưu đãi cho cả hai phía.
+
+SLIDE 2 — Bối cảnh · Diệu Anh · 25 giây
+Người dùng của chúng em là chủ một doanh nghiệp hosting nhỏ. Hiện nay, họ tìm khách mới chủ yếu bằng quảng cáo trả phí, và theo số liệu ban tổ chức, mỗi khách mới tốn khoảng chín mươi nghìn đồng trước khi họ trả đồng nào. Trong khi đó, khách hàng hiện tại, những người hài lòng với dịch vụ, lại chưa được khai thác như một kênh bán hàng.
+
+SLIDE 3 — Giải pháp · Diệu Anh · 30 giây
+Xclipse Referral cho mỗi khách hiện tại một mã giới thiệu riêng. Khi bạn bè họ đăng ký và thanh toán, cả hai cùng nhận ưu đãi. Chi phí cho mỗi khách mới chỉ còn khoảng sáu mươi nghìn đồng. Vì chủ doanh nghiệp chủ yếu dùng điện thoại, chúng em thiết kế cho màn hình dọc: nút chính nằm ở đáy để dùng một tay, thanh tab dưới để chuyển nhanh, số tiền và trạng thái có màu rõ ràng. Mời anh Dũng trình bày phần demo.
+
+SLIDE 4 — Video demo · Vũ Trí Dũng · 20 giây (nói trước khi bật video)
+Cảm ơn Diệu Anh. Sau đây là video gần hai phút ghi lại ứng dụng chạy trên điện thoại với dữ liệu mẫu của ban tổ chức: nạp dữ liệu, đăng ký thành viên, khách nhập mã giới thiệu, thanh toán mô phỏng, các ca gian lận bị chặn, và phần dự phóng. Mời ban giám khảo theo dõi.
+
+SLIDE 5 — Năm tính năng · Vũ Trí Dũng · 30 giây
+Ứng dụng có đủ năm tính năng theo đề. Một, đăng ký thành viên và sinh mã, link giới thiệu riêng. Hai, form khách mới đăng ký qua mã. Ba, trang theo dõi số khách, trạng thái và tổng ưu đãi của từng thành viên. Bốn, thể lệ hiển thị ngay trong app. Năm, bảng giả định và dự phóng. Quy tắc cốt lõi: ưu đãi chỉ được cộng khi khách thanh toán thành công.
+
+SLIDE 6 — Luồng giới thiệu · Vũ Trí Dũng · 25 giây
+Luồng gồm ba bước. Bước một, khách mới nhập mã, chọn gói dịch vụ, hệ thống ghi nhận ở trạng thái đang chờ thanh toán, chưa cộng ưu đãi. Bước hai, khi thanh toán thành công, người giới thiệu nhận ba mươi nghìn, khách mới được giảm ba mươi nghìn. Bước ba, thành viên mở trang Theo dõi để thấy ngay ưu đãi của mình.
+
+SLIDE 7 — Ca thông thường · Vũ Trí Dũng · 25 giây
+Đây là bản chạy thật trên điện thoại. Ban giám khảo có thể quét mã QR để thử ngay. Chỉ ba thao tác: nhập mã giới thiệu và chọn gói, bấm mô phỏng thanh toán thành công, rồi mở tab Theo dõi. Toàn bộ thanh toán và dữ liệu là mô phỏng, lưu trên trình duyệt, nên có thể thử nhiều lần mà không ảnh hưởng gì.
+
+SLIDE 8 — Thể lệ và chống gian lận · Vũ Trí Dũng · 30 giây
+Thể lệ được hiển thị ngay trong ứng dụng. Ưu đãi ba mươi nghìn cho mỗi bên, thêm mười nghìn cho người giới thiệu gián tiếp ở tầng hai. Về chống gian lận, nếu thành viên dùng chính mã của mình để tự giới thiệu, hệ thống từ chối. Nếu khách đã được ghi nhận trước đó, lượt mới bị từ chối vì trùng. Mã sai thì báo lỗi, không lưu. Mời anh Nguyên tiếp tục.
+
+SLIDE 9 — Kiến trúc và kiểm thử · Nguyên · 30 giây
+Cảm ơn Dũng. Về kỹ thuật, ứng dụng chạy hoàn toàn trên trình duyệt. Phần thật là logic giới thiệu, cách tính dự phóng và lưu trữ cục bộ. Phần mô phỏng là thanh toán và dữ liệu mẫu của ban tổ chức, đều có nhãn rõ ràng. Không có khóa API nào trong mã nguồn. Chúng em có bộ kiểm thử tự động cho luồng chính và kiểm tra giao diện ở khổ điện thoại 360 và 390 pixel.
+
+SLIDE 10 — Giả định và cách tính · Nguyên · 30 giây
+Bảng giả định lấy từ số liệu ban tổ chức: một nghìn hai trăm thành viên, mười lăm phần trăm tham gia, mỗi người giới thiệu hai lượt, tỉ lệ chuyển đổi hai mươi lăm phần trăm, doanh thu tháng đầu một trăm tám mươi nghìn mỗi khách. Ưu đãi tầng hai mười nghìn là giả định của đội. Mỗi khách qua giới thiệu tốn sáu mươi nghìn, rẻ hơn quảng cáo ba mươi nghìn. Chương trình chỉ kém hiệu quả hơn quảng cáo khi ưu đãi mỗi khách vượt chín mươi nghìn.
+
+SLIDE 11 — Dự phóng 6 tháng · Nguyên · 30 giây
+Với các giả định đó: một trăm tám mươi người tham gia tạo ra ba trăm sáu mươi khách tiềm năng, và chín mươi khách mới. Doanh thu tháng đầu mười sáu phẩy hai triệu, chi phí ưu đãi năm phẩy bốn triệu, tức doanh thu gấp ba lần chi phí. Công thức luôn hiển thị ngay cạnh bảng, và người dùng có thể sửa từng giả định để xem kịch bản thận trọng hay lạc quan, cùng biểu đồ sáu tháng.
+
+SLIDE 12 — Tổng kết · Nguyên · 25 giây
+Tóm lại, Xclipse Referral giúp doanh nghiệp hosting có khách mới với chi phí thấp hơn quảng cáo, doanh thu gấp ba lần chi phí ưu đãi theo giả định. Giới hạn hiện tại là số liệu mới là mô phỏng. Bước tiếp theo, chúng em muốn thử với khách thật để đo lại tỉ lệ chuyển đổi. Xin cảm ơn ban giám khảo, đội sẵn sàng nhận câu hỏi.
+```
