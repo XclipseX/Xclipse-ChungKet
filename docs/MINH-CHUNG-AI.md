@@ -32,7 +32,7 @@ Mỗi vòng trả lời đủ 5 mục: **mục tiêu → yêu cầu cho AI → v
 |---|---|
 | Mục tiêu | Dự phóng trực quan, đúng số BTC (90 khách, 16,2 tr, 5,4 tr, 3,0x) |
 | Yêu cầu cho AI | Gửi ảnh 1–2: "số dính vào nhau, căn chỉnh không thẳng hàng, dư nhiều khoảng trắng" |
-| Vấn đề khi thử | Nhãn cột đè nhau, bảng tháng vỡ thành thẻ lệch, dòng "hòa vốn" luôn = 0 vì không có chi phí cố định, nút Cài đặt xuống 3 dòng (ảnh 4 là bản đã sửa) |
+| Vấn đề khi thử | Nhãn cột đè nhau, bảng tháng vỡ thành thẻ lệch, dòng "hòa vốn" luôn = 0 vì không có chi phí cố định, nút Cài đặt xuống 3 dòng (ảnh 4) |
 | Yêu cầu sửa | Phễu gọn, thẻ ngưỡng hòa vốn đúng (ưu đãi 60k / quảng cáo 90k / doanh thu 180k), 3 thẻ kịch bản, nút Cài đặt 1 cột |
 | Kết quả kiểm tra lại | Số khớp KD_DuPhong; smoke 330 kiểm tra đạt, 0 lỗi |
 
@@ -50,9 +50,13 @@ Mỗi vòng trả lời đủ 5 mục: **mục tiêu → yêu cầu cho AI → v
 
    ![Dropdown sau khi sửa](minh-chung-ai/anh-3.png)
 
-4. Vòng 3, kết quả: nút Cài đặt xếp 1 cột
+4. Claude Code điều phối: đội gửi ảnh lỗi Dự phóng/Cài đặt, Claude giao agent sửa, chạy test rồi đẩy lên `nop-bai`
 
-   ![Cài đặt sau khi sửa](minh-chung-ai/anh-4.png)
+   ![Claude Code nhận ảnh lỗi và giao agent sửa](minh-chung-ai/anh-4.png)
+
+5. Gemini Antigravity kiểm tra chéo: đọc PROGRESS.md, version.js, file BTC và clone bản nộp để rà soát
+
+   ![Gemini Antigravity rà soát repo](minh-chung-ai/anh-5.png)
 
 ## Bài học
 
