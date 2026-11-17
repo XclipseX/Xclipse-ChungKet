@@ -101,23 +101,25 @@
   function sgn(v) { return (v > 0 ? '+' : v < 0 ? '−' : '±') + num(Math.abs(v), 2) + 'x'; }
 
   function funnelHtml(a, r) {
-    var per = a.rewardReferrer + a.rewardNew, mt = a.members;
-    function node(v, l, w, cls) { return '<div class="fc-node ' + (cls || '') + '" style="--w:' + w + '%"><span class="fc-v">' + esc(v) + '</span><span class="fc-l">' + esc(l) + '</span></div>'; }
-    function op(sym, val, label, key) { var t = key ? tagOf(a, key) : null; return '<div class="fc-op"><span class="fc-opv">' + esc(sym + ' ' + val) + '</span><span class="fc-opl">' + esc(label) + '</span>' + (t ? '<span class="fc-tag ' + t[1] + '">' + t[0] + '</span>' : '') + '</div>'; }
-    var ratio = r.ratio == null ? NO : rx(r.ratio);
+    var per = a.rewardReferrer + a.rewardNew;
+    function tag(key, short) { var t = Array.isArray(key) ? (key.some(function (k) { return a[k] !== DEF[k]; }) ? ['Giả định', 'fc-t-as'] : ['Dữ liệu mẫu (BTC)', 'fc-t-btc']) : tagOf(a, key); return '<span class="fc-tag ' + t[1] + '">' + (short && t[2] !== 0 && t[0].indexOf('BTC') > 0 ? 'Mẫu BTC' : t[0]) + '</span>'; }
+    function row(v, l, opText, key, cls) {
+      return '<div class="fc-row ' + (cls || '') + '"><div class="fc-blk"><span class="fc-v">' + esc(v) + '</span></div><div class="fc-txt"><span class="fc-l">' + esc(l) + '</span>' +
+        (opText ? '<span class="fc-o"><b>' + esc(opText[0]) + '</b> ' + esc(opText[1]) + ' ' + tag(key) + '</span>' : '') + '</div></div>';
+    }
+    function br(v, l, opText, key, cls) {
+      return '<div class="fc-br ' + cls + '"><span class="fc-v">' + esc(v) + '</span><span class="fc-l">' + esc(l) + '</span><span class="fc-o"><b>' + esc(opText[0]) + '</b> ' + esc(opText[1]) + '</span>' + tag(key, true) + '</div>';
+    }
     return '<div class="fc-funnel">' +
-      node(num(mt), 'thành viên hiện có', 100) +
-      op('×', pct(a.participationRate), 'tỉ lệ tham gia giới thiệu', 'participationRate') +
-      node(num(r.participants), 'người tham gia', 88) +
-      op('×', num(a.referralsPerMember), 'lượt giới thiệu mỗi người', 'referralsPerMember') +
-      node(num(r.prospects), 'khách tiềm năng', 76) +
-      op('×', pct(a.conversionRate), 'tỉ lệ chuyển đổi', 'conversionRate') +
-      node(num(r.newCustomers), 'khách mới', 64, 'fc-key') +
-      '<div class="fc-split"><div class="fc-br fc-rev"><div class="fc-op">' + '<span class="fc-opv">× ' + esc(money(a.revenuePerCustomer)) + '</span><span class="fc-opl">doanh thu mỗi khách</span><span class="fc-tag ' + tagOf(a, 'revenuePerCustomer')[1] + '">' + tagOf(a, 'revenuePerCustomer')[0] + '</span></div>' +
-      node(M.vndShort(r.revenue), 'doanh thu', 100, 'fc-rev-n') + '</div>' +
-      '<div class="fc-br fc-cost"><div class="fc-op"><span class="fc-opv">× ' + esc(money(per)) + '</span><span class="fc-opl">ưu đãi mỗi khách (' + esc(M.vndShort(a.rewardReferrer)) + ' + ' + esc(M.vndShort(a.rewardNew)) + ')</span><span class="fc-tag ' + (a.rewardReferrer !== DEF.rewardReferrer || a.rewardNew !== DEF.rewardNew ? 'fc-t-as">Giả định' : 'fc-t-btc">Dữ liệu mẫu (BTC)') + '</span></div>' +
-      node(M.vndShort(r.rewardCost), 'chi phí ưu đãi', 100, 'fc-cost-n') + '</div></div>' +
-      '<div class="fc-result"><span class="fc-rl">Doanh thu ÷ chi phí</span><span class="fc-rv">' + esc(ratio) + '</span></div></div>';
+      row(num(a.members), 'thành viên hiện có', null, null) +
+      row(num(r.participants), 'người tham gia', ['× ' + pct(a.participationRate), 'tỉ lệ tham gia'], 'participationRate') +
+      row(num(r.prospects), 'khách tiềm năng', ['× ' + num(a.referralsPerMember), 'lượt giới thiệu/người'], 'referralsPerMember') +
+      row(num(r.newCustomers), 'khách mới', ['× ' + pct(a.conversionRate), 'tỉ lệ chuyển đổi'], 'conversionRate', 'fc-key') +
+      '<div class="fc-split">' +
+      br(M.vndShort(r.revenue), 'doanh thu', ['× ' + money(a.revenuePerCustomer), 'mỗi khách'], 'revenuePerCustomer', 'fc-rev-n') +
+      br(M.vndShort(r.rewardCost), 'chi phí ưu đãi', ['× ' + money(per), 'mỗi khách'], ['rewardReferrer', 'rewardNew'], 'fc-cost-n') +
+      '</div>' +
+      '<div class="fc-result"><span class="fc-rl">Doanh thu ÷ chi phí</span><span class="fc-rv">' + esc(r.ratio == null ? NO : rx(r.ratio)) + '</span></div></div>';
   }
 
   function breakevenHtml(a) {
@@ -158,6 +160,47 @@
       '<div class="fc-lg"><span><i class="fc-dot fc-d-neg"></i>Làm kết quả xấu đi</span><span><i class="fc-dot fc-d-pos"></i>Làm kết quả tốt lên</span></div>';
   }
 
+  /* Biểu đồ riêng của Dự phóng: một màu, nhãn gọn, trục khớp số tháng */
+  function niceMax(mx) {
+    if (!(mx > 0)) return { max: 1, step: .25 };
+    var p = Math.pow(10, Math.floor(Math.log10(mx / 4))), c = [1, 2, 2.5, 5, 10], i, st;
+    for (i = 0; i < c.length; i++) { st = c[i] * p; if (Math.ceil(mx / st - 1e-9) <= 4) break; }
+    return { max: Math.ceil(mx / st - 1e-9) * st, step: st };
+  }
+  function mFmt(v) { return EP.fmt.number(v / 1e6, 1); }
+  function chartSvg(kind, rows, w, title) {
+    var h = 190, m = { l: 46, r: 8, t: 16, b: 26 }, cw = w - m.l - m.r, ch = h - m.t - m.b, n = rows.length;
+    var R = niceMax(Math.max.apply(null, rows.map(function (d) { return d.value; }))), k = Math.round(R.max / R.step), i, s = '';
+    for (i = 0; i <= k; i++) { var y = m.t + ch - ch * i / k; s += '<line class="fc-grid" x1="' + m.l + '" x2="' + (w - m.r) + '" y1="' + y + '" y2="' + y + '"/><text class="fc-ax" x="' + (m.l - 6) + '" y="' + (y + 4) + '" text-anchor="end">' + esc(M.vndShort(R.step * i)) + '</text>'; }
+    var band = cw / n, every = Math.ceil(n / Math.max(2, Math.floor(cw / 36)));
+    function Y(v) { return m.t + ch - ch * v / R.max; }
+    if (kind === 'bar') {
+      var bw = Math.min(40, band * .66), showAll = band >= 36;
+      rows.forEach(function (d, j) {
+        var x = m.l + band * j + (band - bw) / 2, y = Y(d.value), last = j === n - 1;
+        s += '<rect class="fc-bar' + (last ? ' is-last' : '') + '" x="' + x + '" y="' + y + '" width="' + bw + '" height="' + (m.t + ch - y) + '" rx="5"><title>' + esc(d.label + ': ' + M.vndShort(d.value)) + '</title></rect>';
+        if (showAll || j === 0 || last) s += '<text class="fc-val" x="' + (x + bw / 2) + '" y="' + (y - 5) + '" text-anchor="middle">' + esc(mFmt(d.value)) + '</text>';
+        if (j % every === 0 || last && every === 1) s += '<text class="fc-ax" x="' + (x + bw / 2) + '" y="' + (h - 8) + '" text-anchor="middle">' + esc(d.label) + '</text>';
+      });
+    } else {
+      function X(j) { return m.l + band * j + band / 2; }
+      var pts = rows.map(function (d, j) { return X(j) + ',' + Y(d.value); });
+      s += '<path class="fc-area" d="M' + X(0) + ',' + Y(0) + ' L' + pts.join(' L') + ' L' + X(n - 1) + ',' + Y(0) + 'Z"/><polyline class="fc-line" points="' + pts.join(' ') + '"/>';
+      rows.forEach(function (d, j) {
+        var last = j === n - 1;
+        s += '<circle class="fc-dot2' + (last ? ' is-last' : '') + '" cx="' + X(j) + '" cy="' + Y(d.value) + '" r="' + (last ? 5 : 3.5) + '"><title>' + esc(d.label + ': ' + M.vndShort(d.value)) + '</title></circle>';
+        if (j % every === 0 || last && every === 1) s += '<text class="fc-ax" x="' + X(j) + '" y="' + (h - 8) + '" text-anchor="middle">' + esc(d.label) + '</text>';
+      });
+      s += '<text class="fc-val" x="' + Math.min(w - m.r, X(n - 1) + 2) + '" y="' + (Y(rows[n - 1].value) - 10) + '" text-anchor="end">' + esc(mFmt(rows[n - 1].value)) + '</text>';
+    }
+    return '<svg class="fc-svg" viewBox="0 0 ' + w + ' ' + h + '" width="' + w + '" height="' + h + '" role="img" aria-label="' + esc(title) + '">' + s + '</svg>';
+  }
+  function drawChart(slot, kind, rows, title) {
+    function go() { slot.innerHTML = chartSvg(kind, rows, Math.max(240, slot.clientWidth || 300), title); }
+    slot._fc = go; go();
+    if (root.ResizeObserver && !slot._ro) { slot._ro = new ResizeObserver(function () { if (slot._w !== slot.clientWidth) { slot._w = slot.clientWidth; slot._fc(); } }); slot._ro.observe(slot); }
+  }
+
   function mount(el) {
     el.classList.add('fc');
     el.innerHTML =
@@ -171,8 +214,8 @@
       '<div class="card fc-card"><div class="card-head"><h2 class="section-title">Ba kịch bản</h2></div><div data-slot="fc-scn"></div></div>' +
       '<div class="card fc-card"><div class="card-head"><h2 class="section-title">Giả định nào ảnh hưởng nhiều nhất</h2></div><p class="fc-p">Đổi từng giả định ±10%, các giả định khác giữ nguyên. Đo trên tỉ lệ doanh thu / chi phí.</p><div data-slot="fc-tornado"></div></div>' +
       '<div class="card fc-card"><div class="card-head"><h2 class="section-title">Dự phóng theo tháng</h2></div>' +
-      '<div class="fc-chips"><span class="fc-chip"><i class="fc-dot fc-d-be"></i>Doanh thu mỗi tháng</span></div><div data-slot="fc-chart" style="position:relative;overflow:hidden"></div>' +
-      '<div class="fc-chips mt-3"><span class="fc-chip"><i class="fc-dot fc-d-now"></i>Lũy kế (doanh thu trừ chi phí ưu đãi)</span></div><div data-slot="fc-chart2" style="position:relative;overflow:hidden"></div><div class="mt-3" data-slot="fc-table"></div></div>';
+      '<div class="fc-chips"><span class="fc-chip"><i class="fc-dot fc-d-be"></i>Doanh thu (tr = triệu đồng)</span></div><div data-slot="fc-chart" style="position:relative;overflow:hidden"></div>' +
+      '<div class="fc-chips mt-3"><span class="fc-chip"><i class="fc-dot fc-d-now"></i>Lũy kế sau ưu đãi</span></div><div data-slot="fc-chart2" style="position:relative;overflow:hidden"></div><div class="mt-3" data-slot="fc-table"></div></div>';
     var $ = function (s) { return el.querySelector('[data-slot="' + s + '"]'); };
     var sc = EP.scenario.mount($('sc'), CFG);
     /* Ẩn khối kết quả, độ nhạy, cách tính chung của EP.scenario (đã có bản riêng ở trên/dưới), chỉ trong màn Dự phóng */
@@ -195,11 +238,10 @@
       $('fc-scn').innerHTML = scenariosHtml(sc.scenarios(), sc.results(), a);
       $('fc-tornado').innerHTML = tornadoHtml(sc.sensitivity('ratio', 10));
 
-      EP.charts.bar($('fc-chart'), r.monthly.map(function (m) { return { label: 'T' + m.month, value: m.revenue }; }), { height: 200, format: M.vndShort, title: 'Doanh thu theo tháng (dữ liệu mô phỏng)' });
-      EP.charts.line($('fc-chart2'), r.monthly.map(function (m) { return { label: 'T' + m.month, value: m.cumulative }; }), { height: 200, area: true, format: M.vndShort, title: 'Lũy kế theo tháng' });
-      $('fc-table').innerHTML = '<div class="fc-months">' + r.monthly.map(function (m) {
-        return '<div class="fc-mo"><span class="fc-mo-t">Tháng ' + m.month + '</span><dl><div><dt>Khách mới</dt><dd>' + num(m.newCustomers) + '</dd></div><div><dt>Doanh thu</dt><dd>' + esc(M.vndShort(m.revenue)) + '</dd></div><div><dt>Chi phí ưu đãi</dt><dd>' + esc(M.vndShort(m.rewardCost)) + '</dd></div><div><dt>Lũy kế</dt><dd>' + esc(M.vndShort(m.cumulative)) + '</dd></div></dl></div>';
-      }).join('') + '</div>';
+      drawChart($('fc-chart'), 'bar', r.monthly.map(function (m) { return { label: 'T' + m.month, value: m.revenue }; }), 'Doanh thu theo tháng (dữ liệu mô phỏng)');
+      drawChart($('fc-chart2'), 'line', r.monthly.map(function (m) { return { label: 'T' + m.month, value: m.cumulative }; }), 'Lũy kế theo tháng');
+      $('fc-table').innerHTML = '<div class="fc-mt" role="table" aria-label="Dự phóng theo tháng"><div class="fc-mr fc-mh" role="row"><span role="columnheader">Tháng</span><span role="columnheader">Khách</span><span role="columnheader">Doanh thu</span><span role="columnheader">Ưu đãi</span><span role="columnheader">Lũy kế</span></div>' +
+        r.monthly.map(function (m) { return '<div class="fc-mr" role="row"><span class="fc-mm" role="rowheader">T' + m.month + '</span><span role="cell">' + num(m.newCustomers) + '</span><span role="cell">' + esc(M.vndShort(m.revenue)) + '</span><span role="cell">' + esc(M.vndShort(m.rewardCost)) + '</span><span role="cell">' + esc(M.vndShort(m.cumulative)) + '</span></div>'; }).join('') + '</div>';
     }
     EP.bus.on('scenario:change', function (d) { if (d && d.id === CFG.id && el.isConnected) draw(); });
     draw();
