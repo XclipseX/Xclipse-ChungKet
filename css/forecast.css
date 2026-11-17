@@ -9,28 +9,26 @@
 .fc-sc-host > .card { border-radius: 20px; }
 .fc [hidden] { display: none !important; }
 
-/* phễu */
-.fc-funnel { display: flex; flex-direction: column; align-items: center; gap: 0; }
-.fc-node { width: var(--w, 100%); max-width: 100%; box-sizing: border-box; display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 4px 10px; padding: 12px 14px; min-height: 56px; border-radius: 16px; background: var(--fc-tint); color: var(--text); text-align: center; transition: width var(--dur-3) var(--ease-out); }
+/* phễu gọn: mỗi bước một hàng [khối giá trị][nhãn + phép nhân] */
+.fc-funnel { display: grid; gap: 6px; }
+.fc-row { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 12px; align-items: center; }
+.fc-blk { display: flex; align-items: center; justify-content: flex-end; min-height: 52px; padding: 0 14px; border-radius: 14px; background: var(--fc-tint); }
 .fc-v { font-size: 22px; line-height: 1.2; font-weight: 700; color: var(--fc-navy); }
-.fc-l { font-size: 14px; color: var(--text-muted); }
-.fc-key { background: var(--fc-navy); } .fc-key .fc-v { color: var(--surface); } .fc-key .fc-l { color: var(--surface); opacity: .85; }
-.fc-op { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 0 8px; position: relative; text-align: center; max-width: 100%; }
-.fc-op::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: var(--rule); z-index: 0; }
-.fc-op > * { position: relative; z-index: 1; background: var(--surface); }
-.fc-opv { padding: 2px 12px; border-radius: 999px; border: 1.5px solid var(--fc-coral); color: var(--fc-coral-ink); font-weight: 700; font-size: 16px; }
-.fc-opl { font-size: 14px; color: var(--text-muted); padding: 0 6px; }
-.fc-tag { font-size: 14px; line-height: 1.3; padding: 1px 8px; border-radius: 999px; font-weight: 500; }
+.fc-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.fc-l { font-size: 16px; font-weight: 600; color: var(--text); line-height: 1.3; }
+.fc-o { font-size: 14px; line-height: 1.45; color: var(--text-muted); }
+.fc-o b { color: var(--fc-coral-ink); font-weight: 700; }
+.fc-tag { display: inline-block; white-space: nowrap; font-size: 14px; line-height: 1.3; padding: 0 8px; border-radius: 999px; font-weight: 500; margin-left: 2px; }
 .fc-t-btc { color: var(--fc-sky); background: var(--fc-tint); }
 .fc-t-as { color: var(--fc-coral-ink); background: var(--fc-coral-tint); }
-.fc-op > .fc-t-btc { background: var(--fc-tint); } .fc-op > .fc-t-as { background: var(--fc-coral-tint); }
-.fc-split { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; }
-.fc-br { display: flex; flex-direction: column; align-items: stretch; min-width: 0; }
-.fc-br .fc-op { align-items: center; }
-.fc-br .fc-node { width: 100%; flex-direction: column; align-items: center; gap: 0; }
-.fc-rev-n { background: var(--fc-navy); } .fc-rev-n .fc-v, .fc-rev-n .fc-l { color: var(--surface); }
-.fc-cost-n { background: var(--fc-coral); } .fc-cost-n .fc-v { color: #072D59; } .fc-cost-n .fc-l { color: #072D59; }
-.fc-result { margin-top: 14px; display: inline-flex; align-items: center; gap: 10px; padding: 8px 8px 8px 16px; border-radius: 999px; background: var(--fc-tint); border: 1.5px solid var(--fc-navy); }
+.fc-key .fc-blk { background: var(--fc-navy); } .fc-key .fc-v { color: var(--surface); }
+.fc-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; align-items: stretch; margin-top: 4px; }
+.fc-br { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 12px; border-radius: 16px; min-width: 0; }
+.fc-rev-n { background: var(--fc-tint); border: 1.5px solid var(--fc-navy); }
+.fc-cost-n { background: var(--fc-coral-tint); border: 1.5px solid var(--fc-coral); }
+.fc-br .fc-v { font-size: 22px; } .fc-cost-n .fc-v { color: var(--fc-coral-ink); }
+.fc-br .fc-tag { margin: 2px 0 0; }
+.fc-result { margin-top: 10px; display: inline-flex; align-items: center; gap: 10px; padding: 8px 8px 8px 16px; border-radius: 999px; background: var(--fc-tint); border: 1.5px solid var(--fc-navy); }
 .fc-rl { font-size: 14.5px; color: var(--text); }
 .fc-rv { padding: 4px 14px; border-radius: 999px; background: var(--fc-navy); color: var(--surface); font-size: 20px; font-weight: 700; }
 
@@ -75,11 +73,19 @@
 .fc-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 8px; }
 .fc-chip { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 999px; background: var(--raised); font-size: 14px; color: var(--text); }
 
-/* theo tháng: thẻ gọn */
-.fc-months { display: grid; gap: 8px; }
-.fc-mo { padding: 12px; border-radius: 16px; background: var(--raised); }
-.fc-mo-t { display: inline-block; padding: 2px 12px; border-radius: 999px; background: var(--fc-navy); color: var(--surface); font-size: 14px; font-weight: 700; }
-.fc-mo dl { margin: 10px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; }
-.fc-mo dl > div { min-width: 0; }
-.fc-mo dt { font-size: 14px; color: var(--text-muted); }
-.fc-mo dd { margin: 0; font-size: 16px; font-weight: 700; overflow-wrap: anywhere; }
+/* theo tháng: bảng nhỏ 5 cột */
+.fc-mt { display: grid; gap: 0; }
+.fc-mr { display: grid; grid-template-columns: 52px repeat(4, minmax(0, 1fr)); gap: 4px; align-items: center; min-height: 44px; border-bottom: 1px solid var(--rule); font-size: 14px; }
+.fc-mr > span { text-align: right; font-weight: 600; white-space: nowrap; }
+.fc-mr > span:first-child { text-align: left; }
+.fc-mm { color: var(--fc-navy); font-weight: 700; }
+.fc-mh > span { font-size: 14px; font-weight: 500; color: var(--text-muted); white-space: normal; line-height: 1.2; }
+.fc-mr:last-child { border-bottom: 0; }
+/* biểu đồ riêng */
+.fc-svg { display: block; max-width: 100%; }
+.fc-grid { stroke: var(--rule); stroke-width: 1; }
+.fc-ax { fill: var(--text-muted); font-size: 12px; }
+.fc-val { fill: var(--text); font-size: 12px; font-weight: 700; }
+.fc-bar { fill: var(--fc-navy); opacity: .55; } .fc-bar.is-last { fill: var(--fc-coral); opacity: 1; }
+.fc-area { fill: var(--fc-navy); opacity: .12; } .fc-line { fill: none; stroke: var(--fc-navy); stroke-width: 2.5; stroke-linejoin: round; }
+.fc-dot2 { fill: var(--fc-navy); } .fc-dot2.is-last { fill: var(--fc-coral); }
