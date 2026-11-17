@@ -55,8 +55,8 @@
         '<div class="card"><div class="card-head"><h2 class="section-title">Giao diện</h2></div><div id="set-theme"></div></div>' +
         '<div class="card"><div class="card-head"><h2 class="section-title">Trợ lý AI</h2></div><div id="set-ai"></div></div>' +
         '<div class="card"><div class="card-head"><h2 class="section-title">Dữ liệu</h2></div><p class="muted">Dữ liệu nằm trong trình duyệt này (localStorage). Hãy sao lưu trước khi xóa hoặc đổi máy.</p>' +
-        '<div class="row mt-3"><button class="btn" type="button" data-act="backup">' + EP.ui.icon('download') + 'Sao lưu (JSON)</button><button class="btn" type="button" data-act="restore">' + EP.ui.icon('upload') + 'Khôi phục từ file</button>' +
-        '<button class="btn" type="button" data-act="sample">' + EP.ui.icon('refresh') + 'Nạp lại dữ liệu mẫu (BTC)</button><button class="btn btn-danger" type="button" data-act="wipe">' + EP.ui.icon('trash') + 'Xóa toàn bộ dữ liệu</button></div></div>' +
+        '<div class="mt-3" style="display:grid;grid-template-columns:minmax(0,1fr);gap:8px"><button class="btn" type="button" style="width:100%;justify-content:center;white-space:nowrap" data-act="backup">' + EP.ui.icon('download') + 'Sao lưu (JSON)</button><button class="btn" type="button" style="width:100%;justify-content:center;white-space:nowrap" data-act="restore">' + EP.ui.icon('upload') + 'Khôi phục từ file</button>' +
+        '<button class="btn" type="button" style="width:100%;justify-content:center;white-space:nowrap" data-act="sample">' + EP.ui.icon('refresh') + 'Nạp lại dữ liệu mẫu (BTC)</button><button class="btn btn-danger" type="button" style="width:100%;justify-content:center;white-space:nowrap" data-act="wipe">' + EP.ui.icon('trash') + 'Xóa toàn bộ dữ liệu</button></div></div>' +
         '<p class="muted center">' + esc(cfg.appName) + ' · phiên bản ' + esc(EP.version.version) + ' (' + esc(EP.version.date) + ')</p>';
       var seg = EP.ui.segmented(el.querySelector('#set-theme'), {
         label: 'Giao diện', name: 'set-theme', value: EP.theme.get(),

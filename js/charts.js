@@ -71,7 +71,7 @@
 
   function bar(data, o, w) {
     var h = o.height || 220, f = o.format || fmtDefault, R = range(data), max = R.max, min = R.min, span = (max - min) || 1;
-    var m = { l: 40, r: 8, t: 22, b: 30 }, cw = w - m.l - m.r, ch = h - m.t - m.b, band = cw / data.length, bw = Math.min(56, band * .62);
+    var m = { l: 54, r: 8, t: 22, b: 30 }, cw = w - m.l - m.r, ch = h - m.t - m.b, band = cw / data.length, bw = Math.min(56, band * .62);
     var s = axes(w, h, m, max, f, min), y0 = m.t + ch * max / span;
     data.forEach(function (d, i) {
       var v = Number(d.value) || 0, bh = Math.abs(ch * v / span), x = m.l + band * i + (band - bw) / 2, y = v >= 0 ? y0 - bh : y0;
@@ -84,7 +84,7 @@
 
   function line(data, o, w) {
     var h = o.height || 220, f = o.format || fmtDefault, R = range(data), max = R.max, min = R.min, span = (max - min) || 1;
-    var m = { l: 40, r: 14, t: 18, b: 30 }, cw = w - m.l - m.r, ch = h - m.t - m.b, n = data.length;
+    var m = { l: 54, r: 14, t: 18, b: 30 }, cw = w - m.l - m.r, ch = h - m.t - m.b, n = data.length;
     function X(i) { return m.l + (n === 1 ? cw / 2 : cw * i / (n - 1)); }
     function Y(v) { return m.t + ch - ch * ((Number(v) || 0) - min) / span; }
     var s = axes(w, h, m, max, f, min), pts = data.map(function (d, i) { return X(i) + ',' + Y(d.value); });
