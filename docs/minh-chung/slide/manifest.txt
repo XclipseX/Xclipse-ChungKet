@@ -1,0 +1,14 @@
+Anh dien thoai doc 390x844 @3x (1170x2532), du lieu mau + mo phong (khong phai AI that). Chup tu app local, v0.1.13.
+01-tong-quan-mobile-light.png | Tab Tong quan, da nap du lieu mau
+01-tong-quan-mobile-dark.png | Nhu tren, giao dien toi
+02-thanh-vien-mobile-light.png | Tab Thanh vien: danh sach, ma REF
+03-dang-ky-cho-mobile-light.png | Dang ky REF-MA01 / Nguyen Van Thu / Hosting Co ban: Dang cho thanh toan
+04-dang-ky-da-thanh-toan-mobile-light.png | Sau mo phong thanh toan: uu dai hai phia 30.000 d
+05-theo-doi-mobile-light.png | Tab Theo doi, thanh vien REF-MA01
+06-the-le-mobile-light.png | Tab The le
+07-du-phong-mobile-light.png | Du phong: ket qua KPI
+07-du-phong-mobile-dark.png | Nhu tren, giao dien toi
+08-du-phong-cong-thuc-mobile-light.png | Du phong: khoi cong thuc
+09-du-phong-bieu-do-mobile-light.png | Du phong: bieu do theo thang + luy ke
+10-ca-sai-mobile-light.png | Ca sai: tu gioi thieu bi tu choi
+11-ca-bien-mobile-light.png | Ca bien: khach trung bi tu choi
