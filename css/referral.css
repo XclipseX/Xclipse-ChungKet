@@ -4,3 +4,14 @@
 /* forecast: sr-only table must not widen the page; summary is a 48px tap target */
 table.sr-only { left: 0; max-width: 1px; display: block; overflow: hidden; }
 details > summary.section-title { display: flex; align-items: center; min-height: 48px; cursor: pointer; }
+
+/* Nút có chữ trong thẻ bảng (Thành viên, Theo dõi): không ép thành ô vuông 48px như nút chỉ có icon */
+.table td.actions .btn.btn-sm:not(.btn-ghost) { width: auto; min-width: 48px; height: 48px; padding: 0 14px; gap: 6px; white-space: nowrap; flex: 1 1 auto; justify-content: center; }
+.table td.actions { flex-wrap: wrap; }
+@media (max-width: 767px) {
+  .lx-cards .table td.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; justify-content: stretch; }
+  .lx-cards .table td.actions .btn.btn-sm:not(.btn-ghost) { width: 100%; }
+  .lx-cards .table td.actions .btn.btn-sm:not(.btn-ghost):only-child,
+  .lx-cards .table td.actions .btn.btn-sm:not(.btn-ghost):last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+.lx-cards .table td.actions:empty { display: none; }
