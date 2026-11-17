@@ -28,8 +28,8 @@
   html[data-preset="xclipse"] .brand-name { font-size: 15px; font-weight: 700; }
 
   /* Tiêu đề mục: đậm, chặt chữ, có thanh nhấn san hô nhỏ */
-  html[data-preset="xclipse"] .section-title { font-weight: 800; letter-spacing: -.02em; }
-  html[data-preset="xclipse"] .view-title { font-weight: 800; letter-spacing: -.025em; }
+  html[data-preset="xclipse"] .section-title { font-weight: 700; letter-spacing: -.02em; }
+  html[data-preset="xclipse"] .view-title { font-weight: 700; letter-spacing: -.025em; }
 
   /* Ô nhập: nền băng, vòng focus navy/hồng */
   html[data-preset="xclipse"] .input { background: #F5FBFF; border-radius: 12px; }

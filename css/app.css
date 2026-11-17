@@ -61,7 +61,7 @@
     display: grid; grid-template-columns: 1fr auto; grid-template-areas: "brand actions" "tabs tabs"; gap: 8px 12px; align-items: center;
   }
   .brand { grid-area: brand; display: flex; align-items: center; gap: 10px; min-width: 0; text-decoration: none; color: inherit; }
-  .brand-mark { flex: none; width: 32px; height: 32px; border-radius: 10px; background: var(--ux-grad); color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 16px; box-shadow: inset 0 1px 1px rgba(255,255,255,.35); }
+  .brand-mark { flex: none; width: 32px; height: 32px; border-radius: 10px; background: var(--ux-grad); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 16px; box-shadow: inset 0 1px 1px rgba(255,255,255,.35); }
   .brand-name { font-weight: 700; font-size: 16px; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .brand-tag { display: none; }
   .topbar-actions { grid-area: actions; display: flex; gap: 8px; align-items: center; }
@@ -94,7 +94,7 @@
   .view { animation: view-in var(--dur-3) var(--ease-out) both; }
   @keyframes view-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
   .view-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 16px; margin-bottom: 20px; }
-  .view-title { font-size: clamp(24px, 5vw, 34px); font-weight: 750; }
+  .view-title { font-size: clamp(24px, 5vw, 34px); font-weight: 700; }
   .view-sub { color: var(--text-muted); margin-top: 6px; max-width: 62ch; }
   .view-body > * + * { margin-top: var(--gap); }
   .section-title { font-size: 17px; font-weight: 700; }
@@ -196,7 +196,7 @@
   /* ---------- KPI ---------- */
   .kpi { display: flex; flex-direction: column; gap: 4px; padding: 16px; }
   .kpi-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
-  .kpi-value { font-size: clamp(24px, 6vw, 32px); font-weight: 750; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.1; white-space: nowrap; }
+  .kpi-value { font-size: clamp(24px, 6vw, 32px); font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.1; white-space: nowrap; }
   .kpi-foot { font-size: 12.5px; color: var(--text-muted); display: flex; gap: 6px; align-items: center; min-height: 20px; }
   .delta { font-weight: 650; } .delta.up { color: var(--success); } .delta.down { color: var(--danger); }
 
@@ -299,7 +299,7 @@
   .chart-legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
   .donut-wrap { display: flex; flex-direction: column; align-items: center; }
   .donut-wrap svg { width: min(100%, 220px); }
-  .donut-total { font-size: 24px !important; font-weight: 750; fill: var(--text) !important; }
+  .donut-total { font-size: 24px !important; font-weight: 700; fill: var(--text) !important; }
 
   /* ---------- Ghi chú AI / mô phỏng, chat ---------- */
   .ai-notice { display: flex; gap: 8px; align-items: flex-start; padding: 8px 12px; border-radius: 10px; font-size: 13px; background: var(--pill-warning-bg); color: var(--pill-warning-ink); font-weight: 500; }
@@ -321,7 +321,7 @@
   .chat-form .input { min-height: 44px; padding: 0 14px; }
   .meter { height: 10px; border-radius: 6px; background: var(--active); overflow: hidden; }
   .meter > i { display: block; height: 100%; border-radius: 6px; background: var(--ux-grad); transition: width var(--dur-3) var(--ease-out); }
-  .score-big { font-size: 44px; font-weight: 800; letter-spacing: -.03em; font-variant-numeric: tabular-nums; line-height: 1; }
+  .score-big { font-size: 44px; font-weight: 700; letter-spacing: -.03em; font-variant-numeric: tabular-nums; line-height: 1; }
   .list-plain { list-style: none; display: grid; gap: 8px; }
   .list-plain li { display: flex; gap: 10px; align-items: flex-start; }
   .list-plain .ok { color: var(--success); } .list-plain .no { color: var(--danger); }

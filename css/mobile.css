@@ -29,7 +29,7 @@
   .bnav-lb { font-size: 12px; line-height: 1.1; font-weight: 600; letter-spacing: .005em; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .bnav-item:active .bnav-ic { transform: scale(.86); transition-duration: 90ms; }
   .bnav-item[aria-current="page"] { color: var(--text); }
-  .bnav-item[aria-current="page"] .bnav-lb { font-weight: 750; }
+  .bnav-item[aria-current="page"] .bnav-lb { font-weight: 700; }
   .bnav-item[aria-current="page"] .bnav-ic::before { opacity: 1; transform: none; }
   .bnav-item[aria-current="page"] .ic-on { display: block; }
   .bnav-item[aria-current="page"] .ic-off { display: none; }
@@ -56,7 +56,7 @@
 
   /* ---------- Chữ & tiêu đề ---------- */
   .view-head { margin-bottom: 16px; gap: 8px 16px; }
-  .view-title { font-size: 26px; font-weight: 750; }
+  .view-title { font-size: 26px; font-weight: 700; }
   .view-sub { font-size: 15px; margin-top: 4px; }
   .section-title { font-size: 18px; }
   .muted, .cell-sub, .field-msg, .kpi-foot, .sc-why { font-size: 13.5px; }

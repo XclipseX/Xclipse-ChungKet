@@ -1,2 +1,6 @@
 .sample-card{border:2px solid var(--accent,#FD6E88)}
 .bnav-lb{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* forecast: sr-only table must not widen the page; summary is a 48px tap target */
+table.sr-only { left: 0; max-width: 1px; display: block; overflow: hidden; }
+details > summary.section-title { display: flex; align-items: center; min-height: 48px; cursor: pointer; }
