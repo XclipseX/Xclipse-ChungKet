@@ -16,11 +16,52 @@ details > summary.section-title { display: flex; align-items: center; min-height
 }
 .lx-cards .table td.actions:empty { display: none; }
 
-/* Bộ chọn bottom sheet (js/picker.js) */
-.pk-search { width: 100%; margin-bottom: 8px; }
-.pk-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-.pk-list li { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 14px; font-size: 16px; color: var(--text); cursor: pointer; background: transparent; }
-.pk-list li[hidden] { display: none; }
-.pk-list li:focus-visible, .pk-list li:active { background: var(--raised); outline: none; }
-.pk-list li[aria-selected="true"] { font-weight: 650; color: var(--accent-ink); background: var(--accent-soft); }
-.pk-list li[aria-selected="true"]::after { content: ""; width: 18px; height: 18px; background: currentColor; flex: none; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l5 5 9-10'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l5 5 9-10'/%3E%3C/svg%3E") center / contain no-repeat; }
+/* Bộ chọn tuỳ biến (js/picker.js): trigger phủ lên <select>, menu nổi theo Lucian 031/037/034 */
+select.pk-sel { color: transparent; text-shadow: none; background-image: none; cursor: pointer; }
+select.pk-sel option { color: var(--text); }
+.pk-trig { position: absolute; z-index: 1; display: flex; align-items: center; gap: 10px; padding: 0 12px 0 14px; pointer-events: none; min-width: 0; box-sizing: border-box; }
+.pk-trig[hidden] { display: none; }
+.pk-trig.has-label { padding-top: 16px; }
+.pk-trig .pk-av { width: 30px; height: 30px; border-radius: 9px; }
+.pk-v { flex: 1; min-width: 0; line-height: 1.2; }
+.pk-v b { display: block; font-size: 16px; font-weight: 650; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pk-v small { display: block; font-size: 14px; font-weight: 500; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pk-trig .pk-v small { display: none; }
+.pk-trig.has-label .pk-v small, .pk-trig:not(.has-label) .pk-v small { display: block; }
+.pk-car { width: 18px; height: 18px; flex: none; fill: none; stroke: var(--text-muted); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .45s var(--ease-spring); }
+.pk-trig.is-open .pk-car { transform: rotate(180deg); }
+.pk-av { display: grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: 10px; font-size: 14px; font-weight: 800; letter-spacing: 0; }
+.pk-h0 { background: var(--pill-neutral-bg); color: var(--pill-neutral-ink); }
+.pk-h1 { background: var(--accent-soft); color: var(--accent-ink); }
+.pk-h2 { background: var(--pill-positive-bg); color: var(--pill-positive-ink); }
+.lx-listbox.pk-menu { display: flex; flex-direction: column; padding: 6px; border-radius: 16px; overflow: hidden; box-sizing: border-box; border: 0; background: var(--surface); box-shadow: 0 0 0 1px var(--border), 0 24px 48px -22px color-mix(in srgb, var(--text) 38%, transparent); opacity: 0; transform: translateY(-6px) scaleY(.92); transform-origin: var(--lx-origin, 50% 0); animation: none; transition: opacity .2s var(--ux-ease), transform .45s var(--ease-spring); z-index: 600; }
+.lx-listbox.pk-menu.is-open { opacity: 1; transform: none; }
+.lx-listbox.pk-menu.is-out { opacity: 0; transform: translateY(-4px) scale(.97); transition-duration: .14s; animation: none; }
+.pk-sw { padding: 2px 2px 6px; flex: none; }
+.pk-search { width: 100%; min-height: 44px; padding: 0 14px; border-radius: 12px; border: 0; background: var(--raised); color: var(--text); font-size: 16px; box-shadow: inset 0 0 0 1.5px transparent; transition: box-shadow .25s; box-sizing: border-box; }
+.pk-search:focus { outline: none; box-shadow: inset 0 0 0 2px var(--accent), 0 0 0 4px var(--accent-soft); }
+.pk-list { position: relative; list-style: none; margin: 0; padding: 0; overflow-y: auto; overscroll-behavior: contain; flex: 1 1 auto; min-height: 0; -webkit-overflow-scrolling: touch; }
+.pk-hl { position: absolute; left: 0; right: 0; top: 0; height: 48px; border-radius: 12px; background: var(--raised); opacity: 0; pointer-events: none; transition: transform .3s var(--ease-spring), height .2s; }
+.lx-listbox.pk-menu .pk-o { position: relative; display: flex; align-items: center; justify-content: flex-start; gap: 12px; min-height: 48px; padding: 6px 10px; border-radius: 12px; cursor: pointer; color: var(--text); background: transparent; opacity: 0; transform: translateY(-6px); }
+.lx-listbox.pk-menu.is-open .pk-o { animation: pk-in .42s var(--ease-spring) both; animation-delay: var(--d, 0ms); }
+.lx-listbox.pk-menu .pk-o[hidden] { display: none; }
+.lx-listbox.pk-menu .pk-o:active { background: color-mix(in srgb, var(--text) 8%, transparent); }
+.lx-listbox.pk-menu .pk-o[aria-selected="true"] { background: color-mix(in srgb, var(--text) 5%, transparent); color: var(--text); font-weight: 400; }
+.lx-listbox.pk-menu .pk-o[aria-selected="true"]::after { content: none; }
+.lx-listbox.pk-menu .pk-o[aria-selected="true"] .pk-v b { font-weight: 720; }
+.lx-listbox.pk-menu .pk-o.is-active { background: transparent; }
+.pk-o .pk-ck { margin-left: auto; width: 18px; height: 18px; flex: none; fill: none; stroke: var(--accent-ink); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transform: scale(.4); transition: opacity .2s, transform .4s var(--ease-spring); }
+.pk-o[aria-selected="true"] .pk-ck { opacity: 1; transform: none; }
+.pk-o[aria-disabled="true"] { opacity: .45 !important; cursor: not-allowed; }
+.pk-empty { margin: 0; padding: 14px 12px; color: var(--text-muted); font-size: 14px; text-align: center; }
+@keyframes pk-in { from { opacity: 0; transform: translateY(-6px) scale(.97); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .lx-listbox.pk-menu, .pk-hl, .pk-car, .pk-o .pk-ck { transition: none; }
+  .lx-listbox.pk-menu { transform: none; }
+  .lx-listbox.pk-menu .pk-o, .lx-listbox.pk-menu.is-open .pk-o { animation: none; opacity: 1; transform: none; }
+}
+/* trigger: giá trị 1 dòng khi có nhãn nổi (nhãn + 2 dòng sẽ đè nhau) */
+.pk-trig.has-label { padding-top: 18px; }
+.pk-trig.has-label .pk-v { display: flex; align-items: baseline; gap: 8px; }
+.pk-trig.has-label .pk-v b { flex: 0 1 auto; min-width: 0; }
+.pk-trig.has-label .pk-v small { flex: 0 0 auto; display: block; }
