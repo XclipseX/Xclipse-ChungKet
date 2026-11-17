@@ -44,7 +44,7 @@
         if (!m) return;
         if (act === 'code') EP.ui.copy(m.refCode, 'Đã sao chép mã ' + m.refCode);
         else if (act === 'link') EP.ui.copy(link(m.refCode), 'Đã sao chép link giới thiệu');
-        else if (act === 'track') { root.EP_TRACK_MEMBER = id; root.location.hash = '#/tracking?m=' + encodeURIComponent(id); EP.router && EP.router.go && EP.router.go('tracking'); }
+        else if (act === 'track') { root.EP_TRACK_MEMBER = id; try { root.sessionStorage.setItem('EP_TRACK_MEMBER', id); } catch (e) { /* bỏ qua */ } root.location.hash = '#/tracking?m=' + encodeURIComponent(id); }
       }
     });
     function loadSample() {

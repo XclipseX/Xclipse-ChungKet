@@ -14,7 +14,10 @@
     return { total: rows.length, converted: rows.filter(function (r) { return r.status === 'converted'; }).length, pending: rows.filter(function (r) { return OPEN[r.status]; }).length,
       rejected: rows.filter(function (r) { return REJ[r.status]; }).length, rewardTotal: 0, tier2Reward: 0, referrals: rows };
   }
-  function queryId() { var m = /[?&]m=([^&]+)/.exec(root.location.hash); return m ? decodeURIComponent(m[1]) : root.EP_TRACK_MEMBER || ''; }
+  function hashId() { var m = /[?&]m=([^&]+)/.exec(root.location.hash); try { return m ? decodeURIComponent(m[1]) : ''; } catch (e) { return ''; } }
+  function ssGet() { try { return root.sessionStorage.getItem('EP_TRACK_MEMBER') || ''; } catch (e) { return ''; } }
+  function ssSet(v) { try { root.sessionStorage.setItem('EP_TRACK_MEMBER', v); } catch (e) { /* bỏ qua */ } }
+  function queryId() { return hashId() || ssGet() || root.EP_TRACK_MEMBER || ''; }
 
   EP.register({
     id: 'tracking', label: 'Theo dõi', icon: 'chart-bar', order: 30,
@@ -71,10 +74,24 @@
       var data = Object.keys(counts).map(function (k) { return { label: label(k), value: counts[k] }; });
       if (EP.charts && EP.charts.donut) EP.charts.donut($s('donut'), data, { unit: 'lượt', centerLabel: 'Tổng lượt' });
     }
-    pick.addEventListener('change', function () { cur = pick.value; root.EP_TRACK_MEMBER = cur; refresh(); });
+    pick.addEventListener('change', function () {
+      cur = pick.value; root.EP_TRACK_MEMBER = cur; ssSet(cur);
+      if (hashId()) { try { root.history.replaceState(null, '', '#/tracking'); } catch (e) { /* bỏ qua */ } }
+      refresh();
+    });
+    function applyParam() { /* tham số rõ ràng (#/tracking?m=ID) luôn thắng lựa chọn đã nhớ */
+      var id = hashId() || ssGet();
+      if (!id || !members.get(id)) return;
+      cur = id; root.EP_TRACK_MEMBER = id; ssSet('');
+      refresh(); pick.value = id;
+      pick.dispatchEvent(new Event('input', { bubbles: true }));
+      if (EP.picker && EP.picker.refresh) EP.picker.refresh();
+    }
+    EP.bus.on('route', function (id) { if (id === 'tracking' && root.document.body.contains(el)) applyParam(); });
     function onChange() { if (root.document.body.contains(el)) refresh(); }
     members.onChange(onChange); referrals.onChange(onChange);
     EP.bus.on('demo:reset', refresh); EP.bus.on('restore', refresh);
     refresh();
+    applyParam();
   }
 })(window);
