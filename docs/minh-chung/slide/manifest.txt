@@ -1,4 +1,4 @@
-Anh dien thoai doc 390x844 @3x (1170x2532), du lieu mau + mo phong (khong phai AI that). Chup tu app local, v0.1.13.
+Anh dien thoai doc 390x844 @3x (1170x2532), du lieu mau + mo phong (khong phai AI that). Chup tu app local, v0.1.17.
 01-tong-quan-mobile-light.png | Tab Tong quan, da nap du lieu mau
 01-tong-quan-mobile-dark.png | Nhu tren, giao dien toi
 02-thanh-vien-mobile-light.png | Tab Thanh vien: danh sach, ma REF
