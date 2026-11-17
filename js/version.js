@@ -2,5 +2,5 @@
 (function (root) {
   'use strict';
   root.EP = root.EP || {};
-  root.EP.version = { version: '0.1.4', date: '2026-11-16' };
+  root.EP.version = { version: '0.1.5', date: '2026-11-17' };
 })(window);
