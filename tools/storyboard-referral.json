@@ -11,7 +11,7 @@
   "end": {
     "text": "Cảm ơn đã xem",
     "sub": "Dữ liệu mẫu và số liệu mô phỏng, không phải dữ liệu thật",
-    "seconds": 4
+    "seconds": 5
   },
   "scenes": [
     {
@@ -203,7 +203,7 @@
       "id": "tracking",
       "hash": "#/home",
       "caption": "Theo dõi thành viên KD-001: khách và ưu đãi đã nhận",
-      "minDuration": 10,
+      "minDuration": 12.5,
       "actions": [
         {
           "wait": 1200
@@ -230,7 +230,7 @@
           "wait": 900
         },
         {
-          "eval": "var s=document.querySelector('#tr-pick'); s.selectedIndex=1; s.dispatchEvent(new Event('change',{bubbles:true}))"
+          "eval": "var s=document.querySelector('#tr-pick'); s.value='KD-001'; s.dispatchEvent(new Event('change',{bubbles:true}))"
         },
         {
           "wait": 900
@@ -247,7 +247,7 @@
       "id": "rules",
       "hash": "#/rules",
       "caption": "Thể lệ: ưu đãi hai phía, điều kiện và chống gian lận",
-      "minDuration": 10,
+      "minDuration": 12,
       "actions": [
         {
           "wait": 900
@@ -314,7 +314,7 @@
       "id": "theme",
       "hash": "#/home",
       "caption": "Đổi giao diện sáng và tối",
-      "minDuration": 8,
+      "minDuration": 9.5,
       "actions": [
         {
           "wait": 600

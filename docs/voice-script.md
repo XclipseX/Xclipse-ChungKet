@@ -9,10 +9,10 @@ Mỗi đoạn là **một file mp3 riêng**, tên đúng như cột "File". Đo�
 | v02.mp3 | 00:14 | 15 giây | Ở tab Thành viên, khách hàng hiện tại đăng ký bằng họ tên và số điện thoại. Hệ thống sinh mã giới thiệu riêng, kèm đường link để chia sẻ cho bạn bè. |
 | v03.mp3 | 00:30 | 16 giây | Người được giới thiệu nhập mã khi đăng ký dịch vụ. Lượt này được ghi nhận ở trạng thái chờ thanh toán. Khi thanh toán thành công, cả hai phía cùng nhận ưu đãi ba mươi nghìn đồng. |
 | v04.mp3 | 00:47 | 12 giây | Hệ thống chống gian lận. Thành viên dùng chính mã của mình để tự giới thiệu sẽ bị từ chối, khách trùng cũng không được tính hai lần. |
-| v05.mp3 | 01:00 | 11 giây | Trang theo dõi cho từng thành viên: số khách đã giới thiệu, trạng thái từng lượt và tổng ưu đãi đã nhận. |
-| v06.mp3 | 01:12 | 10 giây | Thể lệ chương trình hiển thị rõ mức ưu đãi hai phía, ưu đãi tầng hai, điều kiện nhận và quy định chống gian lận. |
-| v07.mp3 | 01:23 | 16 giây | Phần dự phóng. Với giả định của ban tổ chức, chương trình mang về chín mươi khách mới, doanh thu mười sáu phẩy hai triệu đồng, chi phí ưu đãi năm phẩy bốn triệu, gấp ba lần chi phí. Công thức luôn hiển thị ngay cạnh bảng. |
-| v08.mp3 | 01:39 | 8 giây | Ứng dụng tối ưu cho điện thoại, có giao diện sáng và tối. |
+| v05.mp3 | 00:57 | 11 giây | Trang theo dõi cho từng thành viên: số khách đã giới thiệu, trạng thái từng lượt và tổng ưu đãi đã nhận. |
+| v06.mp3 | 01:10 | 10 giây | Thể lệ chương trình hiển thị rõ mức ưu đãi hai phía, ưu đãi tầng hai, điều kiện nhận và quy định chống gian lận. |
+| v07.mp3 | 01:22 | 16 giây | Phần dự phóng. Với giả định của ban tổ chức, chương trình mang về chín mươi khách mới, doanh thu mười sáu phẩy hai triệu đồng, chi phí ưu đãi năm phẩy bốn triệu, gấp ba lần chi phí. Công thức luôn hiển thị ngay cạnh bảng. |
+| v08.mp3 | 01:38 | 8 giây | Ứng dụng tối ưu cho điện thoại, có giao diện sáng và tối. |
 | v09.mp3 | 01:48 | 4 giây | Xclipse. Cảm ơn quý vị đã theo dõi. |
 
 ---
