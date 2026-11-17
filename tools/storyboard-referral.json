@@ -1,0 +1,141 @@
+{
+  "app": "Xclipse Referral",
+  "tagline": "Giới thiệu khách, nhận ưu đãi hai phía, dự phóng hiệu quả",
+  "link": "<LINK_DEMO>",
+  "notice": "Dữ liệu mô phỏng AI · Dữ liệu mẫu",
+  "title": {
+    "text": "Xclipse Referral",
+    "sub": "Video demo trên điện thoại · Dữ liệu mô phỏng",
+    "seconds": 3
+  },
+  "end": {
+    "text": "Cảm ơn đã xem",
+    "sub": "Dữ liệu mẫu và số liệu mô phỏng, không phải dữ liệu thật",
+    "seconds": 4
+  },
+  "scenes": [
+    {
+      "id": "home",
+      "hash": "#/home",
+      "caption": "Tổng quan: nạp dữ liệu mẫu của BTC",
+      "minDuration": 10,
+      "note": "TODO-SELECTOR: nút 'Nạp dữ liệu mẫu' ở Tổng quan (text-based)",
+      "actions": [
+        { "wait": 1200 },
+        { "tap": "text=Nạp dữ liệu mẫu" },
+        { "wait": 1500 },
+        { "scroll": 400 },
+        { "wait": 800 }
+      ]
+    },
+    {
+      "id": "members",
+      "hash": "#/members",
+      "caption": "Thành viên: đăng ký, sinh mã REF và sao chép link",
+      "minDuration": 14,
+      "note": "TODO-SELECTOR: nút mở dialog đăng ký, ô tên/SĐT, nút Lưu, nút Sao chép link chưa xác nhận",
+      "actions": [
+        { "wait": 900 },
+        { "tap": "text=Đăng ký thành viên" },
+        { "wait": 700 },
+        { "type": ["input[name=\"name\"], role=textbox[name=\"Họ tên\"]", "Khách Mẫu An"] },
+        { "type": ["input[name=\"phone\"], role=textbox[name=\"Số điện thoại\"]", "0911000111"] },
+        { "tap": "text=Lưu" },
+        { "wait": 1200 },
+        { "tap": "text=Sao chép link" },
+        { "wait": 1000 }
+      ]
+    },
+    {
+      "id": "signup",
+      "hash": "#/signup",
+      "caption": "Đăng ký qua mã: ghi nhận chờ thanh toán (mô phỏng)",
+      "minDuration": 16,
+      "note": "TODO-SELECTOR: ô mã giới thiệu, chọn gói, nút Đăng ký, nút 'Mô phỏng thanh toán thành công' chưa xác nhận",
+      "actions": [
+        { "wait": 900 },
+        { "type": ["input[name=\"refCode\"], role=textbox[name=\"Mã giới thiệu\"]", "REF-MA01"] },
+        { "type": ["input[name=\"customerName\"], role=textbox[name=\"Tên khách\"]", "Khách Mới Bình"] },
+        { "type": ["input[name=\"phone\"], role=textbox[name=\"Số điện thoại\"]", "0900000777"] },
+        { "tap": "text=Hosting Cơ bản" },
+        { "wait": 500 },
+        { "tap": "text=Đăng ký" },
+        { "wait": 1200 },
+        { "tap": "text=Mô phỏng thanh toán thành công" },
+        { "wait": 1500 }
+      ]
+    },
+    {
+      "id": "signup-self",
+      "hash": "#/signup",
+      "caption": "Chặn tự giới thiệu: mã của chính mình bị từ chối",
+      "minDuration": 8,
+      "note": "TODO-SELECTOR: cùng form signup; thông báo lỗi 'từ chối' chưa xác nhận. Dùng REF-LM06 + SĐT 0900002006 (trùng SĐT người giới thiệu)",
+      "actions": [
+        { "wait": 600 },
+        { "type": ["input[name=\"refCode\"], role=textbox[name=\"Mã giới thiệu\"]", "REF-LM06"] },
+        { "type": ["input[name=\"phone\"], role=textbox[name=\"Số điện thoại\"]", "0900002006"] },
+        { "tap": "text=Đăng ký" },
+        { "wait": 1500 }
+      ]
+    },
+    {
+      "id": "tracking",
+      "hash": "#/tracking",
+      "caption": "Theo dõi thành viên KD-001: khách và ưu đãi đã nhận",
+      "minDuration": 10,
+      "note": "TODO-SELECTOR: bộ chọn thành viên (select) chưa xác nhận; dùng dữ liệu mẫu KD-001",
+      "actions": [
+        { "wait": 900 },
+        { "tap": "text=KD-001" },
+        { "wait": 800 },
+        { "scroll": 500 },
+        { "wait": 900 }
+      ]
+    },
+    {
+      "id": "rules",
+      "hash": "#/rules",
+      "caption": "Thể lệ: ưu đãi hai phía, điều kiện và chống gian lận",
+      "minDuration": 10,
+      "note": "Chỉ cuộn, không có selector đặc thù",
+      "actions": [
+        { "wait": 900 },
+        { "scroll": 600 },
+        { "wait": 1000 },
+        { "scroll": 1400 },
+        { "wait": 1000 }
+      ]
+    },
+    {
+      "id": "forecast",
+      "hash": "#/forecast",
+      "caption": "Dự phóng theo giả định: công thức, biểu đồ, sao chép tóm tắt",
+      "minDuration": 16,
+      "note": "TODO-SELECTOR: nút 'Sao chép tóm tắt' và khu biểu đồ chưa xác nhận",
+      "actions": [
+        { "wait": 1000 },
+        { "scroll": 600 },
+        { "wait": 1000 },
+        { "scroll": 1300 },
+        { "wait": 1200 },
+        { "tap": "text=Sao chép tóm tắt" },
+        { "wait": 1000 }
+      ]
+    },
+    {
+      "id": "theme",
+      "hash": "#/home",
+      "caption": "Đổi giao diện sáng và tối",
+      "minDuration": 8,
+      "note": "Dùng action theme của script; không cần selector",
+      "actions": [
+        { "wait": 600 },
+        { "theme": "dark" },
+        { "wait": 1800 },
+        { "theme": "light" },
+        { "wait": 800 }
+      ]
+    }
+  ]
+}

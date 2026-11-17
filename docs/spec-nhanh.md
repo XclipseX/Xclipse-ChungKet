@@ -1,86 +1,63 @@
-# Đặc tả nhanh: Xclipse
+# Spec nhanh — Xclipse Referral (Đề chính thức Bảng B – Kinh tế)
 
-> Tối đa 1 trang. Viết trong 5 phút đầu sprint. Sau khi chốt, không thêm tính năng ngoài danh sách này trừ khi ghi thành quyết định mới trong `DECISIONS.md`.
+**Đề:** Chương trình thành viên giới thiệu khách (Referral) cho doanh nghiệp hosting/domain. App mô phỏng 100%, dữ liệu lưu local. Dữ liệu BTC: `docs/du-lieu-mau-btc.xlsx` (sheets KD_ThanhVien, KD_GioiThieu, KD_QuyDinh, KD_GiaDinh, KD_DuPhong).
 
-**Đề số:** <số> · **Bảng:** <A / B> · **Đề bài gốc (dán nguyên văn):** <…>
-
-## 0. Schema Contract (điều phối viết ở T+5, TRƯỚC khi spawn; dán nguyên văn vào mọi prompt agent)
-
-> 10-15 dòng. Agent không được đổi hoặc tự đặt tên; thiếu thì hỏi. Đổi tên = sửa ở đây và báo mọi agent.
-
+## 0. SCHEMA CONTRACT (mọi agent chép nguyên văn, KHÔNG tự đặt tên khác)
 ```
-ENTITY  <entity>: { id:string, <field>:<number|string|ISO date|bool>, ... }        (mỗi entity 1 dòng)
-COLL    EP.collection('<tên>')  -> <entity>                                        (tên collection)
-FN      <tên hàm>(<tham số>) -> { <khóa>:<kiểu>, ... } | "Không đủ dữ liệu"        (hình dạng trả về)
-EP      EP.register id: '<id>' · EP.aiSpecs.<tên> · EP.demo.register('<tên>')       (id dùng chung)
-RULE    Code tính số, AI chỉ diễn giải; mẫu số = 0 -> "Không đủ dữ liệu" (không 0%/NaN)
-RULE    App mở trống; nút "Điền dữ liệu mẫu" nạp demo
+Collections (EP.collection):
+ 'members'   { id:'KD-001', name, phone, refCode:'REF-MA01', joinedAt:'YYYY-MM-DD', status:'Đang hoạt động', source:'btc'|'user' }
+ 'referrals' { id:'KD-R001', referrerId:'KD-001', refCode, customerName, customerKey (SĐT/mã KH), service, date:'YYYY-MM-DD',
+               status: 'converted'|'pending'|'processing'|'cancelled'|'invalid_self'|'rejected_dup'|'reviewing',
+               revenue (VND, tháng đầu), rewardReferrer, rewardNew, rewardTotal, tier: 1|2, parentReferrerId (tầng 2) | null,
+               note, source:'btc'|'user' }
+Module js/referral.js → window.EP.referral:
+ RULES = { rewardReferrer:30000, rewardNew:30000, tier2Reward:10000, condition:'converted', maxPerMonth:20 }
+ PRICES = [{service:'Hosting Mini',price:99000},{'Hosting Cơ bản',149000},{'Hosting Pro',279000},{'Domain .vn',59000 (năm đầu khuyến mãi)},{'Domain .com',420000 (năm)}]
+ STATUS_LABEL = { converted:'Đã chuyển đổi', pending:'Đang chờ thanh toán', processing:'Đang xử lý', cancelled:'Đã hủy',
+                  invalid_self:'Không hợp lệ – tự giới thiệu', rejected_dup:'Từ chối – trùng', reviewing:'Đang rà soát' }
+ statusFromVN(text) -> status code     // map trạng thái tiếng Việt trong file BTC
+ loadSample() -> {members:n, referrals:n}   // nạp từ window.EP_SAMPLE (js/sample-data.js), ghi đè dữ liệu nguồn 'btc'
+ makeCode(name) -> 'REF-XX99' (duy nhất)
+ registerMember({name, phone}) -> {ok, member, error}
+ signup({refCode, customerName, phone, service}) -> {ok, referral, status, reason}
+    // tự giới thiệu (SĐT trùng SĐT người giới thiệu) -> invalid_self; khách (SĐT/customerKey) đã có -> rejected_dup;
+    // mã không tồn tại -> {ok:false, reason}; hợp lệ -> pending (chưa cộng ưu đãi)
+ pay(referralId) -> referral   // pending/processing/reviewing -> converted, cộng rewardReferrer/rewardNew (+ tier2 cho người giới thiệu của người giới thiệu nếu có)
+ cancel(referralId)
+ memberStats(memberId) -> { total, converted, pending, rejected, rewardTotal, tier2Reward, referrals:[...] }
+ forecast(a) where a = { members, participationRate, referralsPerMember, conversionRate, revenuePerCustomer,
+                         rewardReferrer, rewardNew, adCostPerCustomer, months, monthlyGrowth }
+   -> { participants, prospects, newCustomers, revenue, rewardCost, ratio, referralCostPerCustomer, saving, monthly:[{month, newCustomers, revenue, rewardCost, cumulative}] , formulas:[{label, formula, value}] }
+   // mẫu số = 0 -> 'Không đủ dữ liệu'
+Tabs (EP.register id): 'home' (Tổng quan), 'members' (Thành viên), 'signup' (Đăng ký qua mã), 'tracking' (Theo dõi), 'rules' (Thể lệ), 'forecast' (Dự phóng)
+Ưu đãi: số tiền là VND, hiển thị vi-VN.
 ```
 
-## 1. Bài toán và persona
+## 1. Người dùng & giá trị
+- Chủ doanh nghiệp hosting/domain + thành viên (khách hiện tại). Biến khách hiện tại thành kênh bán: chi phí referral 60.000đ/khách so với quảng cáo 90.000đ/khách (giả định BTC).
 
-- **Persona:** <vai trò cụ thể, ví dụ: marketer tổ chức workshop>
-- **Họ muốn làm gì:** <…>
-- **Vấn đề hiện tại:** <họ đang làm bằng tay, chậm hoặc sai ở đâu>
-- **Giá trị sau khi dùng:** <đo được: giảm số bước, gom dữ liệu về một chỗ…>
+## 2. 5 tính năng lõi + tiêu chí nghiệm thu
+1. **Thành viên**: đăng ký (tên, SĐT), sinh mã REF + link `?ref=CODE`, sao chép link. ✔ mã duy nhất, SĐT hợp lệ, không trùng SĐT.
+2. **Đăng ký qua mã (mô phỏng)**: form khách mới nhập mã (tự điền từ `?ref=`), chọn gói; ghi nhận "Đang chờ thanh toán"; nút "Mô phỏng thanh toán thành công" → chuyển đổi, cộng ưu đãi 2 phía. ✔ tự giới thiệu bị từ chối, trùng khách bị từ chối, mã sai báo lỗi.
+3. **Theo dõi thành viên**: chọn thành viên → số khách đã giới thiệu, danh sách + trạng thái (chip màu), tổng ưu đãi đã nhận (tầng 1 + tầng 2).
+4. **Thể lệ**: ưu đãi 2 phía, điều kiện (thanh toán thành công), chống gian lận (tự giới thiệu, trùng), bảng giá gói giả định, ưu đãi tầng 2.
+5. **Dự phóng**: bảng giả định nhập được (mặc định = KD_GiaDinh) → khách mới, doanh thu, chi phí ưu đãi, tỉ lệ doanh thu/chi phí; công thức + giả định hiển thị cạnh bảng; 3 kịch bản + độ nhạy (EP.scenario); biểu đồ theo tháng; copy tóm tắt chương trình.
+- **Nút "Nạp dữ liệu mẫu"** (BTC) ở Tổng quan và Cài đặt: 8 thành viên, 12 lượt với đủ trạng thái. Kiểm: KD_DuPhong khớp (90 khách mới, 16,2 tr, 5,4 tr, tỉ lệ 3).
+- **Mở rộng:** ưu đãi tầng 2 (gián tiếp 10.000đ), biểu đồ tháng, copy tóm tắt.
 
-## 2. Năm tính năng (MVP)
+## 3. Giả định (nguồn)
+| Giả định | Giá trị | Nguồn |
+|---|---|---|
+| Thành viên hiện có | 1.200 | KD_GiaDinh (BTC) |
+| Tỉ lệ tham gia | 15% | KD_GiaDinh |
+| Lượt giới thiệu/người | 2 | KD_GiaDinh |
+| Tỉ lệ chuyển đổi | 25% | KD_GiaDinh |
+| Doanh thu TB/khách (tháng đầu) | 180.000đ | KD_GiaDinh |
+| Ưu đãi người giới thiệu / khách mới | 30.000đ / 30.000đ | KD_QuyDinh |
+| Chi phí quảng cáo/khách | 90.000đ | KD_GiaDinh |
+| Ưu đãi tầng 2 | 10.000đ | Giả định của đội (≈1/3 ưu đãi tầng 1, giữ tổng ≤ 70.000đ < 90.000đ CPA quảng cáo) |
+| Giá gói | Mini 99k, Cơ bản 149k, Pro 279k /tháng; .vn 59k, .com 420k /năm | Giá trong KD_GioiThieu (BTC), phù hợp mặt bằng thị trường phổ thông — giả định |
+| Tăng trưởng tháng | 10%/tháng, 6 tháng | Giả định của đội |
 
-Mỗi tính năng ghi đủ 4 mục: **Input → Quy tắc → Output → Lưu trữ**, cuối cùng là một **kiểm tra chấp nhận** (làm được thì tick).
-
-### T1. <Nhập dữ liệu đầu vào>
-- **Input:** <từng trường, kiểu dữ liệu, bắt buộc hay không>
-- **Quy tắc:** nếu <thiếu / sai định dạng> thì <báo lỗi ngay dưới ô>; nếu <…> thì <…>
-- **Output:** <màn hình hoặc kết quả hiển thị>
-- **Lưu trữ:** <localStorage / Firestore / không lưu>
-- **Kiểm tra chấp nhận:** ☐ <bước thử> → <kết quả mong đợi>
-
-### T2. <AI phân tích, tạo hoặc gợi ý>
-- **Input:** <dữ liệu từ T1 gửi cho AI>
-- **Quy tắc:** AI chỉ viết nội dung. <Dữ liệu nào lấy từ form, không để AI bịa>; JSON thiếu trường thì <bù bằng bản mô phỏng và báo rõ>
-- **Output:** <cấu trúc kết quả>
-- **Lưu trữ:** <…>
-- **Kiểm tra chấp nhận:** ☐ <…>
-
-### T3. <Lưu, xem, sửa, xoá lịch sử>
-- **Input:** <…>
-- **Quy tắc:** <ví dụ: xoá phải hỏi xác nhận; trùng thì chỉ ghi một lần>
-- **Output:** <…>
-- **Lưu trữ:** <…>
-- **Kiểm tra chấp nhận:** ☐ <…>
-
-### T4. <Tính năng nghiệp vụ theo đề>
-- **Input:** <…>
-- **Quy tắc:** nếu <…> thì <…>
-- **Output:** <…>
-- **Lưu trữ:** <…>
-- **Kiểm tra chấp nhận:** ☐ <…>
-
-### T5. <Tính năng theo đề hoặc quản trị>
-- **Input:** <…>
-- **Quy tắc:** nếu <…> thì <…>
-- **Output:** <…>
-- **Lưu trữ:** <…>
-- **Kiểm tra chấp nhận:** ☐ <…>
-
-## 3. AI làm gì
-
-| Việc AI làm | Gửi AI gì | AI trả về (JSON) | Code tự tính, AI không được viết | Chế độ mô phỏng trả gì |
-|---|---|---|---|---|
-| <ví dụ: viết tiêu đề và 3 lợi ích> | <tên, mô tả ngắn> | <{"headline", "benefits": [...]}> | <ngày, giờ, địa điểm, giá, tên người> | <ghép câu từ công thức theo giọng văn> |
-
-- Ba chế độ: **AI thật** (người dùng tự nhập key, key chỉ ở trình duyệt hoặc máy chủ) · **Copy prompt** (dán kết quả về) · **Mô phỏng** (có nhãn: `<câu nhãn đúng nguyên văn đề>`).
-
-## 4. Ngoài phạm vi
-- <…>
-- <…>
-(Ghi rõ những gì KHÔNG làm, để không bị kéo thêm yêu cầu giữa sprint.)
-
-## 5. Dữ liệu mẫu
-- Nút **"<Điền dữ liệu mẫu>"** điền: <tên sự kiện, thời gian, địa điểm, diễn giả, ưu đãi>
-- Có sẵn <n> bản ghi đăng ký mẫu để demo danh sách và số đếm.
-- Dùng đúng dữ liệu này khi quay video và khi làm bảng kiểm thử, để kết quả lặp lại được.
-
-## 6. Giả định (chọn mặc định, chủ dự án xác nhận hoặc sửa)
-1. <…>
-2. <…>
+## 4. Nhãn dữ liệu
+"Dữ liệu mẫu (BTC)" cho dữ liệu nạp từ file; "Giả định" cho số dự phóng; "Mô phỏng" cho thanh toán/đăng ký giả lập.

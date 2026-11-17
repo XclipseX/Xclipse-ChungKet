@@ -172,7 +172,7 @@ module.exports = async function mobileSuite({ browser, URL, ok, SHOTS, errors, f
       ok(tag + ' ' + name + ': ô số hiện dấu chấm nghìn (không "400000")', b.rawNum.length === 0, b.rawNum.slice(0, 4));
       ok(tag + ' ' + name + ': không phần tử nào vượt mép thẻ', b.overCard.length === 0, b.overCard.slice(0, 4));
     };
-    const tapNav = async (id) => { await page.tap('#bt-' + id); await page.waitForFunction((i) => !document.getElementById('view-' + i).hidden && document.getElementById('view-' + i).querySelector('.view-body').children.length > 0, id); await settle(); };
+    const tapNav = async (id) => { if (await page.$('#bt-' + id)) await page.tap('#bt-' + id); else await page.evaluate((i) => { location.hash = '#/' + i; }, id); await page.waitForFunction((i) => !document.getElementById('view-' + i).hidden && document.getElementById('view-' + i).querySelector('.view-body').children.length > 0, id); await settle(); };
 
     // ---- (5) điều hướng: thanh tab dưới ----
     const nav = await page.evaluate(() => { const n = document.getElementById('bnav'), r = n.getBoundingClientRect(), cs = getComputedStyle(n); return { shown: cs.display !== 'none', pos: cs.position, bottom: Math.round(innerHeight - r.bottom), items: n.querySelectorAll('.bnav-item').length, desk: getComputedStyle(document.getElementById('tabs')).display }; });
