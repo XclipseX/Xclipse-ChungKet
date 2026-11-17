@@ -39,10 +39,25 @@
     },
     {
       "id": "members",
-      "hash": "#/members",
+      "hash": "#/home",
       "caption": "Thành viên: đăng ký, sinh mã REF và sao chép link",
       "minDuration": 14,
       "actions": [
+        {
+          "wait": 1200
+        },
+        {
+          "tap": "[data-act=load-sample] >> visible=true"
+        },
+        {
+          "wait": 900
+        },
+        {
+          "eval": "location.hash='#/members'"
+        },
+        {
+          "wait": 900
+        },
         {
           "wait": 900
         },
@@ -54,7 +69,7 @@
         },
         {
           "type": [
-            "[role=dialog] input[name=name], dialog input[name=name], input[name=name] >> visible=true",
+            "input[name=name] >> visible=true",
             "Khách Mẫu An"
           ]
         },
@@ -65,7 +80,7 @@
           ]
         },
         {
-          "tap": "button[data-act=mb-save] >> visible=true"
+          "tap": "#mb-save >> visible=true"
         },
         {
           "wait": 1200
@@ -80,10 +95,25 @@
     },
     {
       "id": "signup",
-      "hash": "#/signup",
+      "hash": "#/home",
       "caption": "Đăng ký qua mã: ghi nhận chờ thanh toán (mô phỏng)",
       "minDuration": 16,
       "actions": [
+        {
+          "wait": 1200
+        },
+        {
+          "tap": "[data-act=load-sample] >> visible=true"
+        },
+        {
+          "wait": 900
+        },
+        {
+          "eval": "location.hash='#/signup'"
+        },
+        {
+          "wait": 900
+        },
         {
           "wait": 900
         },
@@ -132,6 +162,21 @@
       "minDuration": 8,
       "actions": [
         {
+          "wait": 1200
+        },
+        {
+          "tap": "[data-act=load-sample] >> visible=true"
+        },
+        {
+          "wait": 900
+        },
+        {
+          "eval": "location.hash='#/signup'"
+        },
+        {
+          "wait": 900
+        },
+        {
           "wait": 1500
         },
         {
@@ -160,6 +205,21 @@
       "caption": "Theo dõi thành viên KD-001: khách và ưu đãi đã nhận",
       "minDuration": 10,
       "actions": [
+        {
+          "wait": 1200
+        },
+        {
+          "tap": "[data-act=load-sample] >> visible=true"
+        },
+        {
+          "wait": 900
+        },
+        {
+          "eval": "location.hash='#/tracking'"
+        },
+        {
+          "wait": 900
+        },
         {
           "wait": 1500
         },
@@ -208,10 +268,22 @@
     },
     {
       "id": "forecast",
-      "hash": "#/forecast",
+      "hash": "#/home",
       "caption": "Dự phóng theo giả định: công thức, biểu đồ, sao chép tóm tắt",
       "minDuration": 16,
       "actions": [
+        {
+          "wait": 1200
+        },
+        {
+          "tap": "[data-act=load-sample] >> visible=true"
+        },
+        {
+          "wait": 900
+        },
+        {
+          "eval": "location.hash='#/forecast'"
+        },
         {
           "wait": 1000
         },
