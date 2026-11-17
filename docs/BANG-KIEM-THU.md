@@ -39,3 +39,10 @@ Ca kiểm thử giao diện điện thoại (360px và 390px, không tràn ngang
 - Thanh toán thật, đăng ký thật, gửi tin nhắn: không có, mọi thanh toán là mô phỏng.
 - Điện thoại thật chưa thử, mới thử bằng giả lập 360px và 390px.
 - Quy tắc trần 50% cho domain .vn (xem `docs/assumptions.md`): chưa kiểm chứng trong app.
+
+## Kết quả test tự động đã chạy (17/11/2026, local 8211, Chromium, 360×780 và 390×844)
+
+- `node tests/smoke.cjs http://localhost:8211/`: **330 kiểm tra đạt, 0 lỗi** ("TẤT CẢ ĐẠT"), gồm bộ điện thoại 360/390: không tràn ngang, nút ≥ 48px.
+- `node tests/referral.cjs`: **OK** (nạp dữ liệu mẫu, đăng ký, thanh toán, tự giới thiệu, khách trùng, dự phóng khớp KD_DuPhong).
+- `node scripts/scan-secrets.mjs .`: 108 tệp, **0 lộ khóa**.
+- Các ca TC01–TC10 thử tay: điền cột kết quả khi người phụ trách chạy xong.
